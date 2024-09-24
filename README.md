@@ -1,0 +1,2 @@
+# sabitou
+inventory management project.
