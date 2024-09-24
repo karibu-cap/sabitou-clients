@@ -1,2 +1,2 @@
-# sabitou
-inventory management project.
+# sabitou-clients
+clients of the inventory management project.
