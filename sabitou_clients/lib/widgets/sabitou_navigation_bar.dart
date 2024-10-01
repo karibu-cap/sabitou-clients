@@ -63,23 +63,16 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _buildNavItem(Icons.dashboard_outlined, "Dashboard", 0,
-                        MainAxisAlignment.center),
-                    _buildNavItem(Icons.inventory_outlined, "Inventory", 1,
-                        MainAxisAlignment.center),
-                    _buildNavItem(Icons.store_outlined, "Stores", 2,
-                        MainAxisAlignment.center),
-                    _buildNavItem(Icons.shopping_bag_outlined, "Sales Orders",
-                        3, MainAxisAlignment.center),
-                    _buildNavItem(Icons.local_shipping_outlined, "Suppliers", 4,
-                        MainAxisAlignment.center),
-                    _buildNavItem(Icons.insert_chart_outlined, "Reports", 5,
-                        MainAxisAlignment.center),
+                    _buildNavItem(Icons.dashboard_outlined, "Dashboard", 0),
+                    _buildNavItem(Icons.inventory_outlined, "Inventory", 1),
+                    _buildNavItem(Icons.store_outlined, "Stores", 2),
+                    _buildNavItem(Icons.shopping_bag_outlined, "Sales Orders", 3),
+                    _buildNavItem(Icons.local_shipping_outlined, "Suppliers", 4),
+                    _buildNavItem(Icons.insert_chart_outlined, "Reports", 5),
                     if (!isCollapsed) _buildAdminSection(),
                   ],
                 ),
               ),
-              //const SizedBox(height: 20),
               Divider(
                 color: Colors.grey[400],
                 thickness: 1,
@@ -87,10 +80,9 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                 endIndent: 10,
               ),
               const Spacer(), // so the setting and the logout go at teh bottom
-              _buildNavItem(Icons.settings_outlined, "Settings", 6,
-                  MainAxisAlignment.start),
+              _buildNavItem(Icons.settings_outlined, "Settings", 6),
               _buildNavItem(
-                  Icons.logout_outlined, "Log Out", 7, MainAxisAlignment.start),
+                  Icons.logout_outlined, "Log Out", 7),
             ],
           ),
         ),
@@ -104,8 +96,7 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, int index,
-      MainAxisAlignment mainAxisAlignment) {
+  Widget _buildNavItem(IconData icon, String label, int index) {
     bool isSelected = widget.selectedIndex == index;
     double phorizontal = isCollapsed ? 25 : 40;
     double mhorizontal = isCollapsed ? 0 : 15;
@@ -123,7 +114,6 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
           borderRadius: isCollapsed ? null : BorderRadius.circular(10),
         ),
         child: Row(
-          //mainAxisAlignment: mainAxisAlignment,
           children: [
             Icon(
               icon,
@@ -149,7 +139,6 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
 
   Widget _buildAdminSection() {
     return Column(
-      //mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InkWell(
           onTap: () {
@@ -159,7 +148,6 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
           },
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 15),
-            //alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -177,10 +165,8 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                   ),
                   ],
                 ),
-                //const SizedBox(width: 20),
                 Container(
                   alignment: Alignment.centerRight,
-                  //padding: EdgeInsets.only(left: 50),
                   child: Icon(
                     isAdminExpanded
                         ? Icons.keyboard_arrow_down
@@ -199,7 +185,7 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
             child: Column(
               children: [
                 _buildNavItem(
-                    Icons.person_outline, "Users", 8, MainAxisAlignment.center),
+                    Icons.person_outline, "Users", 8),
               ],
             ),
           ),
