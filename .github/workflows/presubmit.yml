@@ -1,0 +1,31 @@
+name: Presubmit
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sabitu-client:
+    uses: ./.github/workflows/presubmit_sabitu_client.yml
+    secrets:
+      SABITOU_CLIENT_TOKEN_WRITE_CONTENTS: ${{ secrets.SABITOU_CLIENT_TOKEN_WRITE_CONTENTS }}
+
+  scripts:
+    uses: ./.github/workflows/presubmit_scripts.yml
+
+  spellcheck:
+    uses: ./.github/workflows/presubmit_spellcheck.yml
+
+  unit-tests-finished:
+    needs: [sabitu-client]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: coverallsapp/github-action@v2
+        with:
+          parallel-finished: true
+          carryforward: true
