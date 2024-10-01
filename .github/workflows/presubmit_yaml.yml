@@ -1,0 +1,13 @@
+name: Pre-Submit (YAML)
+on:
+  workflow_call:
+
+jobs:
+  actionlint:
+    runs-on: "ubuntu-latest"
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: reviewdog/action-actionlint@v1
+        with:
+          fail_on_error: true
