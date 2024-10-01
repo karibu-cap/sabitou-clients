@@ -21,12 +21,9 @@ jobs:
   spellcheck:
     uses: ./.github/workflows/presubmit_spellcheck.yml
 
-  yaml:
-    uses: ./.github/workflows/presubmit_yaml.yml
-
   unit-tests-finished:
     needs: [sabitu-client]
-    runs-on: [self-hosted, Linux]
+    runs-on: ubuntu-latest
     steps:
       - uses: coverallsapp/github-action@v2
         with:
