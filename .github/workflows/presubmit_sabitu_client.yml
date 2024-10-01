@@ -12,7 +12,7 @@ env:
 
 jobs:
   build-web:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       # Install pre-requisites.
@@ -26,7 +26,7 @@ jobs:
       - run: ./scripts/build_web_app.sh sabitou_clients
 
   unit-tests:
-    runs-on: [self-hosted, Linux]
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       # Install pre-requisites.
@@ -40,7 +40,7 @@ jobs:
       - run: find . -name \*lcov.info -type f -delete
 
       # Run unit tests on all packages that contain tests.
-      - run: ./scripts/run_tests.sh sabitou_clients
+      - run: ./scripts/run_dart_tests.sh sabitou_clients
 
       # Upload Coverage to coveralls.io.
       - name: Upload Coverage to Coveralls
@@ -63,7 +63,7 @@ jobs:
   generate-goldens:
     needs: unit-tests
     if: ${{ always() && (needs.unit-tests.result=='failure') }}
-    runs-on: [self-hosted, Linux]
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       # Install pre-requisites.
@@ -88,7 +88,7 @@ jobs:
   update-goldens:
     needs: generate-goldens
     if: ${{ always() && (needs.generate-goldens.result=='success') }}
-    runs-on: [self-hosted, Linux]
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       # Install pre-requisites.
@@ -135,7 +135,7 @@ jobs:
         run: echo "No Changes!"
 
   dart-format:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       # Install pre-requisites.

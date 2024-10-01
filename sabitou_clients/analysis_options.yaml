@@ -128,7 +128,6 @@ linter:
     - use_function_type_syntax_for_parameters
     #
     #
-    # Spreeloop rules.
     #
     - prefer_final_locals
     - require_trailing_commas
