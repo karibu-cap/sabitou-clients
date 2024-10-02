@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'routes/app_routes.dart';
 import 'services/internationalization/app_translations.dart';
 import 'services/internationalization/internationalization.dart';
+import 'services/storage/app_storate.dart';
 import 'themes/app_themes.dart';
+import 'utils/constants.dart';
 
 /// The logger configuration.
 Future<void> main() async {
@@ -23,31 +27,53 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: AppTranslations(),
-      supportedLocales: AppInternationalization.supportedLocales,
+      supportedLocales: AppInternationalizationService.supportedLocales,
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en'),
+      getPages: AppRouter.pageRoutes,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      darkTheme: ThemeService.darkTheme,
+      theme: ThemeService.lightTheme,
       themeMode: ThemeService.to.themeMode,
     );
   }
 }
 
 Future<void> _initServices() async {
+  setUrlStrategy(PathUrlStrategy());
+
+  /// Initialize the get storage service.
   await GetStorage.init();
+  final appStorage = AppStorageService(AppStorageType.getStorage);
+  Get.put<AppStorageService>(
+    appStorage,
+    permanent: true,
+  );
 
   // Initialize the services and repositories.
-  final AppInternationalization appInternationalization =
-      AppInternationalization(Get.deviceLocale ?? const Locale('en'));
+  final languageCode =
+      AppStorageService.to.read<String>(PreferencesKey.language);
+
+  final AppInternationalizationService appInternationalization =
+      AppInternationalizationService(
+    languageCode != null
+        ? Locale(languageCode)
+        : Get.deviceLocale ?? const Locale('en'),
+    appStorage,
+  );
 
   // Register internationalization services.
-  Get.put<AppInternationalization>(appInternationalization, permanent: true);
+  Get.put<AppInternationalizationService>(
+    appInternationalization,
+    permanent: true,
+  );
 
   /// Register theme service.
-  final themeService = ThemeService();
+  final themeService = ThemeService(appStorage);
   Get.put<ThemeService>(themeService, permanent: true);
   await themeService.init();
 }

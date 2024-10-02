@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:get/get.dart';
 
+import '../../utils/constants.dart';
+import '../storage/app_storate.dart';
+
 /// Extension method for easy access to translations
 extension TranslationExtension on String {
   /// Get the translation for the given key.
@@ -10,7 +13,8 @@ extension TranslationExtension on String {
   /// translation string. For example, if the translation string is "Hello, {name}!"
   /// and [args] is {"name": "John"}, the result will be "Hello, John!".
   String trs([Map<String, String>? args]) {
-    return Get.find<AppInternationalization>().translate(this, args: args);
+    return Get.find<AppInternationalizationService>()
+        .translate(this, args: args);
   }
 }
 
@@ -18,11 +22,16 @@ extension TranslationExtension on String {
 /// the user.
 /// Local strings are strings that do not come from a database.
 /// e.g: error messages, page titles.
-class AppInternationalization extends GetxService {
+class AppInternationalizationService extends GetxService {
+  final _key = PreferencesKey.language;
+  final AppStorageService _box;
   final Rx<Locale> _locale;
 
+  /// Direct access to the internationalization service.
+  static AppInternationalizationService get to => Get.find();
+
   /// Constructors for internationalization.
-  AppInternationalization(Locale initialLocale)
+  AppInternationalizationService(Locale initialLocale, this._box)
       : _locale = Rx<Locale>(initialLocale);
 
   /// The current locale.
@@ -41,6 +50,7 @@ class AppInternationalization extends GetxService {
     }
     _locale.value = newLocale;
     Get.updateLocale(newLocale);
+    _box.write(_key, newLocale.languageCode);
   }
 
   /// Gets the translation for the given key.

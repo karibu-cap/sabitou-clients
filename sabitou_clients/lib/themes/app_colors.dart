@@ -12,8 +12,8 @@ class AppColors {
   static const Color grey500 = Color(0xFF667085);
   static const Color grey600 = Color(0xFF5d6679);
   static const Color grey700 = Color(0xFF48505e);
-  static const Color grey800 = Color(0xFF383e49);
-  static const Color grey900 = Color(0xFF2b2f38);
+  static const Color grey800 = Color(0xFF1e293b);
+  static const Color grey900 = Color(0xFF0f172a);
 
   // Primary
   static const Color primary50 = Color(0xFFe8f1fd);
@@ -21,11 +21,11 @@ class AppColors {
   static const Color primary200 = Color(0xFF93bdf8);
   static const Color primary300 = Color(0xFF629ff4);
   static const Color primary400 = Color(0xFF448df2);
-  static const Color primary500 = Color(0xFF1570ef);
+  static const Color primary500 = Color(0xFF2563eb);
   static const Color primary600 = Color(0xFF1366d9);
   static const Color primary700 = Color(0xFF0f50aa);
   static const Color primary800 = Color(0xFF0c3e83);
-  static const Color primary900 = Color(0xFF092f64);
+  static const Color primary900 = Color(0xFF020817);
 
   // Error
   static const Color error50 = Color(0xFFfeeceb);
