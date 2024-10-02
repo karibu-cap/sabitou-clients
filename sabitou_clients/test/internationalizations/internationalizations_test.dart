@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 import 'package:sabitou_clients/services/internationalization/internationalization.dart';
 import 'package:sabitou_clients/services/storage/app_storate.dart';
 
-// class MockGetStorage extends Mock implements GetStorage {}
-
 void main() {
   group('AppInternationalization', () {
     late AppInternationalizationService appInt;
@@ -32,24 +30,35 @@ void main() {
     });
 
     test(
-        'Translate should return key for _placeholder_ for non existing translation',
-        () {
-      expect(appInt.translate('non_existent_key'), equals('_placeholder_'));
-    });
-
+      'Translate should return key for _placeholder_ for non existing translation',
+      () {
+        expect(
+          appInt.translate('non_existent_key'),
+          equals('_placeholder_'),
+        );
+      },
+    );
     test('Translate should handle parameter substitution', () {
-      AppInternationalizationService.translations['greeting'] = {
+      AppInternationalizationService.to.translations['greeting'] = {
         'en': 'Hello, @name!',
         'fr': 'Bonjour, @name!',
       };
-
       expect(
-        appInt.translate('greeting', args: {'name': 'Alice'}),
+        AppInternationalizationService.to
+            .translate('greeting', args: {'name': 'Alice'}),
         equals('Hello, Alice!'),
       );
+
+      final appIn = AppInternationalizationService(
+        const Locale('fr'),
+        AppStorageService.to,
+      );
+      appIn.translations['greeting'] = {
+        'en': 'Hello, @name!',
+        'fr': 'Bonjour, @name!',
+      };
       expect(
-        AppInternationalizationService(const Locale('fr'), AppStorageService.to)
-            .translate('greeting', args: {'name': 'Alice'}),
+        appIn.translate('greeting', args: {'name': 'Alice'}),
         equals('Bonjour, Alice!'),
       );
     });

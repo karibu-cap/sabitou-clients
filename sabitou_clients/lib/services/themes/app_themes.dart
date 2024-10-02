@@ -42,6 +42,7 @@ class AppThemeService extends GetxService {
   /// Initializes the theme service.
   Future<AppThemeService> init() async {
     _isDarkMode.value = _box.read(_key) ?? false;
+
     return this;
   }
 

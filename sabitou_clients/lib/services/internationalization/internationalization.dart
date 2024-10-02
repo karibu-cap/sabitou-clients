@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../utils/constants.dart';
 import '../storage/app_storate.dart';
 
-/// Extension method for easy access to translations
+/// Extension method for easy access to translations.
 extension TranslationExtension on String {
   /// Get the translation for the given key.
   ///
@@ -18,14 +18,27 @@ extension TranslationExtension on String {
   }
 }
 
-/// AppInternalization defines all the 'local' strings displayed to
-/// the user.
-/// Local strings are strings that do not come from a database.
-/// e.g: error messages, page titles.
+/// AppInternalization defines all the 'local' strings displayed to.
 class AppInternationalizationService extends GetxService {
   final _key = PreferencesKey.language;
   final AppStorageService _box;
   final Rx<Locale> _locale;
+
+  /// The translations map key.
+  Map<String, Map<String, String>> translations = {
+    'sabitu': {
+      'en': 'Sabitu',
+      'fr': 'Sabitou',
+    },
+    'cancel': {
+      'en': 'Cancel',
+      'fr': 'Annuler',
+    },
+    'stores': {
+      'en': 'Stores',
+      'fr': 'Magasins',
+    },
+  };
 
   /// Direct access to the internationalization service.
   static AppInternationalizationService get to => Get.find();
@@ -42,6 +55,27 @@ class AppInternationalizationService extends GetxService {
         const Locale('en'),
         const Locale('fr'),
       ];
+
+  /// Returns the localized value of [stores].
+  String get stores {
+    return _stringOfLocalizedValue(
+      'stores',
+    );
+  }
+
+  /// Returns the localized value of sabitu.
+  String get sabitu {
+    return _stringOfLocalizedValue(
+      'sabitu',
+    );
+  }
+
+  /// Returns the localized value of cancel.
+  String get cancel {
+    return _stringOfLocalizedValue(
+      'cancel',
+    );
+  }
 
   /// Changes the locale.
   void changeLocale(Locale newLocale) {
@@ -63,6 +97,7 @@ class AppInternationalizationService extends GetxService {
     if (args != null) {
       return _replaceArgs(translation, args);
     }
+
     return translation;
   }
 
@@ -71,6 +106,7 @@ class AppInternationalizationService extends GetxService {
     args.forEach((key, value) {
       result = result.replaceAll('@$key', value);
     });
+
     return result;
   }
 
@@ -79,42 +115,5 @@ class AppInternationalizationService extends GetxService {
     Map<String, String>? args,
   ]) {
     return value.trs(args);
-  }
-
-  /// The translations map key.
-  static Map<String, Map<String, String>> translations = {
-    'sabitu': {
-      'en': 'Sabitu',
-      'fr': 'Sabitou',
-    },
-    'cancel': {
-      'en': 'Cancel',
-      'fr': 'Annuler',
-    },
-    'stores': {
-      'en': 'Stores',
-      'fr': 'Magasins',
-    },
-  };
-
-  /// Returns the localized value of [stores].
-  String get stores {
-    return _stringOfLocalizedValue(
-      'stores',
-    );
-  }
-
-  /// Returns the localized value of sabitu.
-  String get sabitu {
-    return _stringOfLocalizedValue(
-      'sabitu',
-    );
-  }
-
-  /// Returns the localized value of cancel.
-  String get cancel {
-    return _stringOfLocalizedValue(
-      'cancel',
-    );
   }
 }

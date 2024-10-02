@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Grey
+  // Grey.
   static const Color grey50 = Color(0xFFF4F5FC);
   static const Color grey100 = Color(0xFFd0d3d9);
   static const Color grey200 = Color(0xFFb9bdc7);
@@ -15,7 +15,7 @@ class AppColors {
   static const Color grey800 = Color(0xFF1e293b);
   static const Color grey900 = Color(0xFF0f172a);
 
-  // Primary
+  // Primary.
   static const Color primary50 = Color(0xFFe8f1fd);
   static const Color primary100 = Color(0xFFb6d3fa);
   static const Color primary200 = Color(0xFF93bdf8);
@@ -27,7 +27,7 @@ class AppColors {
   static const Color primary800 = Color(0xFF0c3e83);
   static const Color primary900 = Color(0xFF020817);
 
-  // Error
+  // Error.
   static const Color error50 = Color(0xFFfeeceb);
   static const Color error100 = Color(0xFFfac5c1);
   static const Color error200 = Color(0xFFf8a9a3);
@@ -39,7 +39,7 @@ class AppColors {
   static const Color error800 = Color(0xFF84251f);
   static const Color error900 = Color(0xFF651d18);
 
-  // Warning
+  // Warning.
   static const Color warning50 = Color(0xFFfef4e6);
   static const Color warning100 = Color(0xFFfdddb3);
   static const Color warning200 = Color(0xFFfbcc8e);
@@ -51,7 +51,7 @@ class AppColors {
   static const Color warning800 = Color(0xFF884f05);
   static const Color warning900 = Color(0xFF683c04);
 
-  // Success
+  // Success.
   static const Color success50 = Color(0xFFe7f8f0);
   static const Color success100 = Color(0xFFb6e9d1);
   static const Color success200 = Color(0xFF92deba);
