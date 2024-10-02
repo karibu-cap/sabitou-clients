@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sabitou_clients/utils/constants.dart';
+
 
 class SabitouNavigationBar extends StatefulWidget {
   final int selectedIndex;
@@ -20,18 +22,18 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
     return Row(
       children: [
         Container(
-          width: isCollapsed ? 70 : 240,
+          width: isCollapsed ? 70 : 230,
           color: Theme.of(context).colorScheme.surface,
           child: Column(
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                 alignment: Alignment.centerLeft,
-                height: isCollapsed ? 30 : 45,
+                height: isCollapsed ? 30 : 40,
                 child: Image.asset(
                   isCollapsed
-                  ? 'assets/logo/logo.png'
-                  : 'assets/logo/logo_with_name.png',
+                      ? 'assets/logo/logo.png'
+                      : 'assets/logo/logo_with_name.png',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -41,7 +43,9 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                 padding: const EdgeInsets.only(left: 10),
                 child: IconButton(
                   icon: Icon(
-                    isCollapsed ? Icons.chevron_right_sharp : Icons.chevron_left_outlined,
+                    isCollapsed
+                        ? Icons.chevron_right_sharp
+                        : Icons.chevron_left_outlined,
                     color: Colors.black54,
                   ),
                   onPressed: () {
@@ -63,12 +67,12 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _buildNavItem(Icons.dashboard_outlined, "Dashboard", 0),
-                    _buildNavItem(Icons.inventory_outlined, "Inventory", 1),
-                    _buildNavItem(Icons.store_outlined, "Stores", 2),
-                    _buildNavItem(Icons.shopping_bag_outlined, "Sales Orders", 3),
-                    _buildNavItem(Icons.local_shipping_outlined, "Suppliers", 4),
-                    _buildNavItem(Icons.insert_chart_outlined, "Reports", 5),
+                    _buildNavItem(NavBarItem.dashBaord, 0),
+                    _buildNavItem(NavBarItem.inventory, 1),
+                    _buildNavItem(NavBarItem.store, 2),
+                    _buildNavItem(NavBarItem.shoppingBag, 3),
+                    _buildNavItem(NavBarItem.localShipping, 4),
+                    _buildNavItem(NavBarItem.insertChart, 5),
                     if (!isCollapsed) _buildAdminSection(),
                   ],
                 ),
@@ -83,8 +87,8 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _buildNavItem(Icons.settings_outlined, "Settings", 6),
-                    _buildNavItem(Icons.logout_outlined, "Log Out", 7),
+                    _buildNavItem(NavBarItem.settings, 6),
+                    _buildNavItem(NavBarItem.logout, 7),
                   ],
                 ),
               ),
@@ -101,7 +105,7 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, int index) {
+  Widget _buildNavItem(NavBarItem navBarItem, int index) {
     bool isSelected = widget.selectedIndex == index;
     double phorizontal = isCollapsed ? 25 : 40;
     double mhorizontal = isCollapsed ? 0 : 15;
@@ -121,7 +125,7 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
         child: Row(
           children: [
             Icon(
-              icon,
+              navBarItem.icon,
               color: isSelected ? Colors.white : Colors.black54,
               size: 20,
             ),
@@ -130,7 +134,7 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                   width: 10), // put some space between the lable and icon
             if (!isCollapsed)
               Text(
-                label,
+                navBarItem.lable,
                 style: TextStyle(
                     color: isSelected ? Colors.white : Colors.black54,
                     fontWeight:
@@ -156,18 +160,18 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Row(
+                Row(
                   children: [
-                    Padding(padding: EdgeInsets.only(left: 50)),
-                    Icon(Icons.admin_panel_settings_outlined,
-                    color: Colors.black54),
-                    SizedBox(width: 10),
-                  Text(
-                    "Admin",
-                    style: TextStyle(
-                      color: Colors.black54,
+                    const Padding(padding: EdgeInsets.only(left: 50)),
+                    Icon(NavBarItem.adminPanelSettings.icon,
+                        color: Colors.black54),
+                    const SizedBox(width: 10), // sepration between the icon and the lable
+                    Text(
+                      NavBarItem.adminPanelSettings.lable,
+                      style: const TextStyle(
+                        color: Colors.black54,
+                      ),
                     ),
-                  ),
                   ],
                 ),
                 Container(
@@ -179,7 +183,6 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                     color: Colors.black54,
                   ),
                 )
-                  
               ],
             ),
           ),
@@ -189,8 +192,7 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
             padding: const EdgeInsets.only(left: 30),
             child: Column(
               children: [
-                _buildNavItem(
-                    Icons.person_outline, "Users", 8),
+                _buildNavItem(NavBarItem.person, 8),
               ],
             ),
           ),
@@ -198,3 +200,5 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
     );
   }
 }
+
+
