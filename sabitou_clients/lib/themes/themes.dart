@@ -1,19 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../services/storage/app_storate.dart';
-import '../utils/constants.dart';
 import 'app_colors.dart';
 
-/// The theme service.
-class ThemeService extends GetxService {
-  final AppStorageService _box;
-  final _key = PreferencesKey.isDartMode;
-  final _isDarkMode = false.obs;
-
-  static final FlexColorScheme _lightTheme = FlexColorScheme.light(
+final class Themes {
+  /// The light theme.
+  static final lightTheme = FlexColorScheme.light(
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     blendLevel: 9,
     appBarOpacity: 0.95,
@@ -108,7 +100,8 @@ class ThemeService extends GetxService {
         ),
   );
 
-  static final FlexColorScheme _darkTheme = FlexColorScheme.dark(
+  /// The dark theme.
+  static final darkTheme = FlexColorScheme.dark(
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     blendLevel: 15,
     appBarStyle: FlexAppBarStyle.background,
@@ -203,40 +196,4 @@ class ThemeService extends GetxService {
           displayColor: AppColors.grey100,
         ),
   );
-
-  /// Whether the app is in dark mode.
-  bool get isDarkMode => _isDarkMode.value;
-
-  /// Direct access to the theme service.
-  static ThemeService get to => Get.find();
-
-  /// The light theme.
-  static ThemeData get lightTheme => _lightTheme.toTheme;
-
-  /// The dark theme.
-  static ThemeData get darkTheme => _darkTheme.toTheme;
-
-  /// Gets the current theme mode.
-  ThemeMode get themeMode =>
-      _isDarkMode.value ? ThemeMode.dark : ThemeMode.light;
-
-  /// Constructor of new theme service.
-  ThemeService(
-    this._box,
-  );
-
-  Future<void> _saveThemeToBox(bool isDarkMode) => _box.write(_key, isDarkMode);
-
-  /// Initializes the theme service.
-  Future<ThemeService> init() async {
-    _isDarkMode.value = _box.read(_key) ?? false;
-    return this;
-  }
-
-  /// Switches the theme mode between light and dark, and saves it to the storage.
-  void switchTheme() {
-    _isDarkMode.value = !_isDarkMode.value;
-    Get.changeThemeMode(_isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
-    _saveThemeToBox(_isDarkMode.value);
-  }
 }

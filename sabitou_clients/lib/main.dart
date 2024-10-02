@@ -8,7 +8,8 @@ import 'routes/app_routes.dart';
 import 'services/internationalization/app_translations.dart';
 import 'services/internationalization/internationalization.dart';
 import 'services/storage/app_storate.dart';
-import 'themes/app_themes.dart';
+import 'services/themes/app_themes.dart';
+import 'themes/themes.dart';
 import 'utils/constants.dart';
 
 /// The logger configuration.
@@ -36,9 +37,9 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      darkTheme: ThemeService.darkTheme,
-      theme: ThemeService.lightTheme,
-      themeMode: ThemeService.to.themeMode,
+      darkTheme: Themes.darkTheme.toTheme,
+      theme: Themes.lightTheme.toTheme,
+      themeMode: AppThemeService.to.themeMode,
     );
   }
 }
@@ -73,7 +74,7 @@ Future<void> _initServices() async {
   );
 
   /// Register theme service.
-  final themeService = ThemeService(appStorage);
-  Get.put<ThemeService>(themeService, permanent: true);
+  final themeService = AppThemeService(appStorage);
+  Get.put<AppThemeService>(themeService, permanent: true);
   await themeService.init();
 }
