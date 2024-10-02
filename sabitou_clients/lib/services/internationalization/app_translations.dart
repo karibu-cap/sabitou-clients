@@ -9,7 +9,7 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys {
     final result = <String, Map<String, String>>{};
-    for (final entry in AppInternationalization.translations.entries) {
+    for (final entry in AppInternationalizationService.translations.entries) {
       for (final langEntry in entry.value.entries) {
         result.putIfAbsent(langEntry.key, () => {})[entry.key] =
             langEntry.value;

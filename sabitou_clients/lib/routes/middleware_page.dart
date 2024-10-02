@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 /// The middle page.
 final class MiddlewarePage extends StatelessWidget {
@@ -11,8 +10,6 @@ final class MiddlewarePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShadApp(
-      home: child,
-    );
+    return child;
   }
 }

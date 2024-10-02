@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
+
 import 'package:sabitou_clients/services/internationalization/internationalization.dart';
+import 'package:sabitou_clients/services/storage/app_storate.dart';
+
+// class MockGetStorage extends Mock implements GetStorage {}
 
 void main() {
   group('AppInternationalization', () {
-    late AppInternationalization appInt;
-
+    late AppInternationalizationService appInt;
     setUp(() {
-      appInt = AppInternationalization(const Locale('en'));
-      Get.put<AppInternationalization>(appInt);
-    });
+      final storage = AppStorageService(AppStorageType.fake);
+      Get.put(storage);
 
-    tearDown(Get.reset);
+      appInt = AppInternationalizationService(const Locale('en'), storage);
+      Get.put<AppInternationalizationService>(appInt);
+    });
 
     test('Initial locale should be English', () {
       expect(appInt.locale.languageCode, equals('en'));
@@ -21,7 +25,8 @@ void main() {
     test('Translate should return correct translation for existing key', () {
       expect(appInt.translate('cancel'), equals('Cancel'));
       expect(
-        AppInternationalization(const Locale('fr')).translate('cancel'),
+        AppInternationalizationService(const Locale('fr'), AppStorageService.to)
+            .translate('cancel'),
         equals('Annuler'),
       );
     });
@@ -33,7 +38,7 @@ void main() {
     });
 
     test('Translate should handle parameter substitution', () {
-      AppInternationalization.translations['greeting'] = {
+      AppInternationalizationService.translations['greeting'] = {
         'en': 'Hello, @name!',
         'fr': 'Bonjour, @name!',
       };
@@ -43,7 +48,7 @@ void main() {
         equals('Hello, Alice!'),
       );
       expect(
-        AppInternationalization(const Locale('fr'))
+        AppInternationalizationService(const Locale('fr'), AppStorageService.to)
             .translate('greeting', args: {'name': 'Alice'}),
         equals('Bonjour, Alice!'),
       );
@@ -51,11 +56,11 @@ void main() {
 
     test('Supported locales should contain English and French', () {
       expect(
-        AppInternationalization.supportedLocales,
+        AppInternationalizationService.supportedLocales,
         contains(const Locale('en')),
       );
       expect(
-        AppInternationalization.supportedLocales,
+        AppInternationalizationService.supportedLocales,
         contains(const Locale('fr')),
       );
     });
