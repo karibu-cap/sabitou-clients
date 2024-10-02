@@ -20,7 +20,7 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
     return Row(
       children: [
         Container(
-          width: isCollapsed ? 70 : 250,
+          width: isCollapsed ? 70 : 240,
           color: Theme.of(context).colorScheme.surface,
           child: Column(
             children: [
@@ -41,7 +41,7 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                 padding: const EdgeInsets.only(left: 10),
                 child: IconButton(
                   icon: Icon(
-                    isCollapsed ? Icons.arrow_forward : Icons.arrow_back,
+                    isCollapsed ? Icons.chevron_right_sharp : Icons.chevron_left_outlined,
                     color: Colors.black54,
                   ),
                   onPressed: () {
@@ -79,10 +79,15 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                 indent: 10,
                 endIndent: 10,
               ),
-              const Spacer(), // so the setting and the logout go at teh bottom
-              _buildNavItem(Icons.settings_outlined, "Settings", 6),
-              _buildNavItem(
-                  Icons.logout_outlined, "Log Out", 7),
+              Flexible(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildNavItem(Icons.settings_outlined, "Settings", 6),
+                    _buildNavItem(Icons.logout_outlined, "Log Out", 7),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
