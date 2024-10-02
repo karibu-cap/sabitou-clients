@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../services/themes/app_themes.dart';
 import '../../themes/app_colors.dart';
-import '../../themes/app_themes.dart';
 
 /// The theme switcher.
 class CPThemeSwitcher extends StatelessWidget {
@@ -13,19 +13,19 @@ class CPThemeSwitcher extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => GestureDetector(
-        onTap: ThemeService.to.switchTheme,
+        onTap: AppThemeService.to.switchTheme,
         child: Container(
           width: 70,
           height: 35,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: ThemeService.to.isDarkMode
+            color: AppThemeService.to.isDarkMode
                 ? AppColors.grey900
                 : AppColors.grey100,
           ),
           child: AnimatedAlign(
             duration: const Duration(milliseconds: 300),
-            alignment: ThemeService.to.isDarkMode
+            alignment: AppThemeService.to.isDarkMode
                 ? Alignment.centerRight
                 : Alignment.centerLeft,
             child: Container(
@@ -33,15 +33,15 @@ class CPThemeSwitcher extends StatelessWidget {
               height: 35,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: ThemeService.to.isDarkMode
+                color: AppThemeService.to.isDarkMode
                     ? AppColors.grey800
                     : AppColors.grey50,
               ),
               child: Icon(
-                ThemeService.to.isDarkMode
+                AppThemeService.to.isDarkMode
                     ? Icons.nightlight_round
                     : Icons.wb_sunny,
-                color: ThemeService.to.isDarkMode
+                color: AppThemeService.to.isDarkMode
                     ? AppColors.grey50
                     : AppColors.warning400,
               ),
