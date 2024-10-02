@@ -18,16 +18,13 @@ abstract class PagesRoutesNoParams {
 
 /// The pages routes.
 abstract class PagesRoutes {
-  /// The  home route.
-  /// eg: http:localhost:8080.
+  /// The home route, for example, http:localhost:8080.
   static final home = _HomeRoute();
 
-  /// The  transfer route.
-  /// eg: http:localhost:8080/connection.
+  /// The transfer route, for example, http:localhost:8080/connection.
   static final connection = _ConnectionRoute();
 
-  /// The  transfer route.
-  /// eg: http:localhost:8080/registration.
+  /// The transfer route For example: http://localhost:8080/registration.
   static final registration = _RegistrationRoute();
 }
 

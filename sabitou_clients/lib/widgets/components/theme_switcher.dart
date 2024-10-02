@@ -6,7 +6,7 @@ import '../../themes/app_colors.dart';
 
 /// The theme switcher.
 class CPThemeSwitcher extends StatelessWidget {
-  /// Constructor for [ComponentThemeSwitcher].
+  /// Constructor for [CPThemeSwitcher].
   const CPThemeSwitcher({super.key});
 
   @override
@@ -18,7 +18,7 @@ class CPThemeSwitcher extends StatelessWidget {
           width: 70,
           height: 35,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
             color: AppThemeService.to.isDarkMode
                 ? AppColors.grey900
                 : AppColors.grey100,

@@ -12,7 +12,7 @@ final class CPLanguageSelection extends StatelessWidget {
     return Obx(
       () => Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
           color: Theme.of(context).cardColor,
           boxShadow: [
             BoxShadow(
@@ -23,7 +23,11 @@ final class CPLanguageSelection extends StatelessWidget {
           ],
         ),
         child: PopupMenuButton<String>(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
           onSelected: (value) =>
               AppInternationalizationService.to.changeLocale(Locale(value)),
           itemBuilder: (context) =>

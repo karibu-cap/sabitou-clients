@@ -9,6 +9,25 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  plugins:
+    - dart_code_linter
+  exclude:
+    - sabitou_clients/**/build/**
+    - sabitou_clients/**/test/**
+    - sabitou_clients/ios/**
+    - sabitou_clients/android/**
+    - sabitou_clients/web/**
+    - sabitou_clients/windows/**
+    - sabitou_clients/linux/**
+    - sabitou_clients/macos/**
+  language:
+    strict-casts: true
+    strict-raw-types: true
+  errors:
+    # treat missing required parameters as a warning (not a hint).
+    missing_required_param: warning
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`
@@ -22,7 +41,8 @@ linter:
   # producing the lint.
   rules:
     - prefer_const_constructors
-    - avoid_print
+    - avoid_print:
+        severity: error
     - use_key_in_widget_constructors
     - prefer_single_quotes
     - avoid_redundant_argument_values
@@ -97,7 +117,6 @@ linter:
     - prefer_mixin
     - public_member_api_docs
     - type_annotate_public_apis
-    - slash_for_doc_comments
     - unnecessary_const
     - unnecessary_lambdas
     - unnecessary_new
@@ -123,7 +142,6 @@ linter:
     - prefer_if_null_operators
     - prefer_spread_collections
     - recursive_getters
-    - unawaited_futures
     - unnecessary_null_in_if_null_operators
     - use_function_type_syntax_for_parameters
     #
@@ -133,5 +151,104 @@ linter:
     - require_trailing_commas
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+dart_code_linter:
+  exclude:
+    exclude:
+      - sabitou_clients/**/build/**
+      - sabitou_clients/test/**
+      - sabitou_clients/ios/**
+      - sabitou_clients/android/**
+      - sabitou_clients/web/**
+      - sabitou_clients/windows/**
+      - sabitou_clients/linux/**
+      - sabitou_clients/macos/**
+  metrics:
+    cyclomatic-complexity: 25
+    number-of-parameters: 3
+    maximum-nesting-level: 8
+    source-lines-of-code: 90
+    min-identifier-length: 2
+
+  anti-patterns:
+    - long-method:
+        severity: error
+  rules:
+    # Dart rules.
+    - avoid-collection-methods-with-unrelated-types:
+        severity: style
+    - avoid-global-state:
+        severity: style
+    - avoid-late-keyword:
+        severity: style
+    - avoid-missing-enum-constant-in-map:
+        severity: style
+    - avoid-nested-conditional-expressions:
+        severity: style
+    - avoid-non-null-assertion:
+        severity: error
+    - avoid-throw-in-catch-block
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unrelated-type-assertions
+    - avoid-unused-parameters:
+        severity: style
+    - binary-expression-operand-order:
+        severity: style
+    - double-literal-format:
+        severity: style
+    - format-comment:
+        severity: error
+    - member-ordering:
+        severity: style
+        order:
+          - fields
+          - getters-setters
+          - methods
+    - newline-before-return:
+        severity: error
+    - no-boolean-literal-compare:
+        severity: style
+    - no-empty-block:
+        severity: style
+    - no-equal-then-else:
+        severity: style
+    - no-object-declaration:
+        severity: style
+    - prefer-async-await:
+        severity: style
+    - prefer-conditional-expressions:
+        severity: style
+    - prefer-correct-type-name:
+        severity: style
+    - prefer-first:
+        severity: style
+    - prefer-last:
+        severity: style
+    - prefer-trailing-comma:
+        severity: error
+
+    # Flutter rules.
+    - always-remove-listener:
+        severity: error
+    - avoid-border-all:
+        severity: error
+    - avoid-returning-widgets:
+        severity: error
+    - avoid-unnecessary-setstate:
+        severity: error
+    - avoid-wrapping-in-padding:
+        severity: error
+    - prefer-const-border-radius:
+        severity: error
+    - prefer-extracting-callbacks:
+        severity: style
+    - avoid-shrink-wrap-in-lists:
+        severity: error
+    - avoid-wrapping-in-padding:
+        severity: error
+    - prefer-correct-edge-insets-constructor:
+        severity: error
+    - prefer-using-list-view:
+        severity: error
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

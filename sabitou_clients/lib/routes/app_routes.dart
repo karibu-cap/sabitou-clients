@@ -53,19 +53,18 @@ final class AppRouter {
   }
 
   /// Gets the current route name.
-  static String getCurrentLocation(BuildContext context) {
+  static String getCurrentLocation() {
     return Get.currentRoute;
   }
 
   /// Checks if there are routes to pop.
-  static bool canPop(BuildContext context) {
-    return Get.key.currentState?.canPop() ??
-        false; // Check if there are routes to pop
+  static bool canPop() {
+    return Get.key.currentState?.canPop() ?? false;
   }
 
   /// Pops the current route.
-  static void onPop(BuildContext context) {
-    Get.back(); // Use Get.back() to pop the current route
+  static void onPop() {
+    Get.back();
   }
 }
 

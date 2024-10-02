@@ -17,13 +17,13 @@ abstract class AppStorageService {
   /// Direct access to the app storage service.
   static AppStorageService get to => Get.find();
 
-  /// Writes data on your container
+  /// Writes data on your container.
   Future<void> write(String key, dynamic value);
 
-  /// Reads data from your container
+  /// Reads data from your container.
   T? read<T>(String key);
 
-  /// Removes data from your container
+  /// Removes data from your container.
   Future<void> remove(String key);
 
   /// Clears all data from your container.

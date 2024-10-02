@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
+/// The theme service.
 final class Themes {
   /// The light theme.
   static final lightTheme = FlexColorScheme.light(
@@ -63,14 +64,14 @@ final class Themes {
       navigationBarSelectedIconSchemeColor: SchemeColor.onPrimary,
       navigationBarMutedUnselectedIcon: false,
       navigationBarIndicatorSchemeColor: SchemeColor.primary,
-      navigationBarIndicatorOpacity: 1.00,
+      navigationBarIndicatorOpacity: 1.0,
       navigationBarIndicatorRadius: 12.0,
       navigationRailSelectedLabelSchemeColor: SchemeColor.primary,
       navigationRailMutedUnselectedLabel: false,
       navigationRailSelectedIconSchemeColor: SchemeColor.onPrimary,
       navigationRailMutedUnselectedIcon: false,
       navigationRailIndicatorSchemeColor: SchemeColor.primary,
-      navigationRailIndicatorOpacity: 1.00,
+      navigationRailIndicatorOpacity: 1.0,
       navigationRailIndicatorRadius: 12.0,
       navigationRailBackgroundSchemeColor: SchemeColor.surface,
     ),
@@ -105,7 +106,7 @@ final class Themes {
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     blendLevel: 15,
     appBarStyle: FlexAppBarStyle.background,
-    appBarOpacity: 0.90,
+    appBarOpacity: 0.9,
     subThemesData: const FlexSubThemesData(
       blendOnLevel: 10,
       blendOnColors: false,
@@ -160,14 +161,14 @@ final class Themes {
       navigationBarSelectedIconSchemeColor: SchemeColor.onPrimary,
       navigationBarMutedUnselectedIcon: false,
       navigationBarIndicatorSchemeColor: SchemeColor.primary,
-      navigationBarIndicatorOpacity: 1.00,
+      navigationBarIndicatorOpacity: 1.0,
       navigationBarIndicatorRadius: 12.0,
       navigationRailSelectedLabelSchemeColor: SchemeColor.primary,
       navigationRailMutedUnselectedLabel: false,
       navigationRailSelectedIconSchemeColor: SchemeColor.onPrimary,
       navigationRailMutedUnselectedIcon: false,
       navigationRailIndicatorSchemeColor: SchemeColor.primary,
-      navigationRailIndicatorOpacity: 1.00,
+      navigationRailIndicatorOpacity: 1.0,
       navigationRailIndicatorRadius: 12.0,
       navigationRailBackgroundSchemeColor: SchemeColor.surface,
     ),

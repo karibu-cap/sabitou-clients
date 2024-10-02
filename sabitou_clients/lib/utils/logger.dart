@@ -5,6 +5,14 @@ final class LoggerApp {
   /// The class name.
   final String? className;
 
+  /// The logger configuration.
+  final Logger logger = Logger(
+    printer: PrettyPrinter(
+      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
+    ),
+    level: Level.trace,
+  );
+
   /// Log a message at level [Level.warning].
   void warning(String message, {Object? error, StackTrace? stackTrace}) =>
       logger.w(
@@ -41,12 +49,4 @@ final class LoggerApp {
 
   /// Constructor of new [LoggerApp].
   LoggerApp([this.className]);
-
-  /// The logger configuration.
-  final Logger logger = Logger(
-    printer: PrettyPrinter(
-      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
-    ),
-    level: Level.trace,
-  );
 }
