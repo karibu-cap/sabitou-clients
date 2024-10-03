@@ -14,7 +14,7 @@ class AppThemeService extends GetxService {
   final _isDarkMode = false.obs;
 
   static final FlexColorScheme _lightTheme = Themes.lightTheme;
-  static final FlexColorScheme _darkTheme = Themes.lightTheme;
+  static final FlexColorScheme _darkTheme = Themes.darkTheme;
 
   /// Whether the app is in dark mode.
   bool get isDarkMode => _isDarkMode.value;
