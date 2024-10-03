@@ -10,10 +10,10 @@ class NavItem extends StatelessWidget {
   /// A call back function which handles item selection.
   final void Function() onTap;
 
-  /// The index of the currenly selected item. To know if an item should be highlighted on not.
+  /// The index of the currently selected item. To know if an item should be highlighted on not.
   final int selectedIndex;
 
-  /// Indicates if the navigation bar is collpased or not.
+  /// Indicates if the navigation bar is collpsed or not.
   /// Will determine if only the items icon should be shown (when collapsed),
   ///  or the icon and the lable be showed (when expaned).
   final bool isCollapsed;
