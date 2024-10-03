@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'login_screen.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
@@ -8,6 +10,17 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
+  void login() {
+    String Email = emailController.text;
+    String Password = passwordController.text;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,23 +28,26 @@ class _SignUpState extends State<SignUp> {
       body: Center(
         child: Stack(
           children: [
-            // Background Image
             Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/fayeed_logo.png'),
-                  fit: BoxFit.cover,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/fayeed_logo.png',
+                    fit: BoxFit.cover,
+                  ),
+                ],
               ),
             ),
             Center(
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 60, vertical: 24),
-                width: 482,
-                height: 500,
+                
+                width: 475,
+                height: 490,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(5),
@@ -51,25 +67,27 @@ class _SignUpState extends State<SignUp> {
                       ),
                       const SizedBox(height: 24),
                       // Input Field 1
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextField(
+                        controller: usernameController,
+                        decoration: const InputDecoration(
                           hintText: 'Username',
                           border: OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 16),
                       // Input Field 2
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextField(
+                        controller: emailController,
+                        decoration: const InputDecoration(
                           hintText: 'Email Address',
                           border: OutlineInputBorder(),
                         ),
-                        obscureText: true,
                       ),
                       const SizedBox(height: 16),
 
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextField(
+                        controller: passwordController,
+                        decoration: const InputDecoration(
                           hintText: 'Password',
                           border: OutlineInputBorder(),
                         ),
@@ -77,8 +95,9 @@ class _SignUpState extends State<SignUp> {
                       ),
                       const SizedBox(height: 16),
 
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextField(
+                        controller: confirmPasswordController,
+                        decoration: const InputDecoration(
                           hintText: 'Confirm password',
                           border: OutlineInputBorder(),
                         ),
@@ -87,7 +106,9 @@ class _SignUpState extends State<SignUp> {
                       const SizedBox(height: 40),
 
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          login();
+                        },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
@@ -109,7 +130,14 @@ class _SignUpState extends State<SignUp> {
                           const Text('Already a member?'),
                           const SizedBox(width: 8),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Login(),
+                                ),
+                              );
+                            },
                             child: const Text(
                               'Login here',
                               style: TextStyle(
