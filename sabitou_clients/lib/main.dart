@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'routes/app_routes.dart';
+import 'screens/registration/sign_up.dart';
 import 'services/internationalization/app_translations.dart';
 import 'services/internationalization/internationalization.dart';
 import 'services/storage/app_storate.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       translations: AppTranslations(),
       supportedLocales: AppInternationalizationService.supportedLocales,
       locale: Get.deviceLocale,
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
       darkTheme: Themes.darkTheme.toTheme,
       theme: Themes.lightTheme.toTheme,
       themeMode: AppThemeService.to.themeMode,
+      home: SignUp(),
     );
   }
 }
