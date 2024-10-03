@@ -1,21 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:sabitou_clients/utils/constants.dart';
+import '../utils/constants.dart';
+import 'admin_section_navigation_item.dart';
+import 'navigation_item.dart';
 
-
+/// This builds the side navigation bar.
 class SabitouNavigationBar extends StatefulWidget {
-  final int selectedIndex;
-  final Function(int) onItemSelected;
+  /// Call back function for handling selection of an item on the navigation bar.
+  final Function(int) onItemTapped;
 
-  const SabitouNavigationBar(
-      {super.key, required this.selectedIndex, required this.onItemSelected});
+  /// Sabitou Navigation bar.
+  const SabitouNavigationBar({
+    super.key,
+    required this.onItemTapped,
+  });
 
   @override
   State<SabitouNavigationBar> createState() => _SabitouNavigationBarState();
 }
 
 class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
+  /// Indicates whether the sidebar is collapsed.
+  ///
+  /// If true, the sidebar is in a collapsed state, displaying only icons.
+  /// If false, the sidebar is expanded, showing both icons and labels.
   bool isCollapsed = true;
   bool isAdminExpanded = false;
+
+  /// The index of the currently selected item. Used to know which item to highlight.
+  int selectedIndex = NavBarItem.dashBaord.indx;
+
+  void _toggleBoolean() {
+    setState(() {
+      isCollapsed = !isCollapsed;
+    });
+  }
+
+  void _onNavItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+    widget.onItemTapped(index);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +73,7 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                         : Icons.chevron_left_outlined,
                     color: Colors.black54,
                   ),
-                  onPressed: () {
-                    setState(() {
-                      isCollapsed = !isCollapsed;
-                    });
-                  },
+                  onPressed: _toggleBoolean,
                 ),
               ),
               Divider(
@@ -67,13 +88,48 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _buildNavItem(NavBarItem.dashBaord, 0),
-                    _buildNavItem(NavBarItem.inventory, 1),
-                    _buildNavItem(NavBarItem.store, 2),
-                    _buildNavItem(NavBarItem.shoppingBag, 3),
-                    _buildNavItem(NavBarItem.localShipping, 4),
-                    _buildNavItem(NavBarItem.insertChart, 5),
-                    if (!isCollapsed) _buildAdminSection(),
+                    NavItem(
+                      navBarItem: NavBarItem.dashBaord,
+                      onTap: () => _onNavItemTapped(0),
+                      isCollapsed: isCollapsed,
+                      selectedIndex: selectedIndex,
+                    ),
+                    NavItem(
+                      navBarItem: NavBarItem.inventory,
+                      onTap: () => _onNavItemTapped(1),
+                      isCollapsed: isCollapsed,
+                      selectedIndex: selectedIndex,
+                    ),
+                    NavItem(
+                      navBarItem: NavBarItem.store,
+                      onTap: () => _onNavItemTapped(2),
+                      isCollapsed: isCollapsed,
+                      selectedIndex: selectedIndex,
+                    ),
+                    NavItem(
+                      navBarItem: NavBarItem.shoppingBag,
+                      onTap: () => _onNavItemTapped(3),
+                      selectedIndex: selectedIndex,
+                      isCollapsed: isCollapsed,
+                    ),
+                    NavItem(
+                      navBarItem: NavBarItem.localShipping,
+                      onTap: () => _onNavItemTapped(4),
+                      selectedIndex: selectedIndex,
+                      isCollapsed: isCollapsed,
+                    ),
+                    NavItem(
+                      navBarItem: NavBarItem.insertChart,
+                      onTap: () => _onNavItemTapped(5),
+                      selectedIndex: selectedIndex,
+                      isCollapsed: isCollapsed,
+                    ),
+                    if (!isCollapsed)
+                      AdminSectionNavigationItem(
+                        onItemTapped: () => _onNavItemTapped(8),
+                        selectedIndex: selectedIndex,
+                        isCollapsed: isCollapsed,
+                      ),
                   ],
                 ),
               ),
@@ -87,8 +143,18 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _buildNavItem(NavBarItem.settings, 6),
-                    _buildNavItem(NavBarItem.logout, 7),
+                    NavItem(
+                      navBarItem: NavBarItem.settings,
+                      onTap: () => _onNavItemTapped(6),
+                      selectedIndex: selectedIndex,
+                      isCollapsed: isCollapsed,
+                    ),
+                    NavItem(
+                      navBarItem: NavBarItem.logout,
+                      onTap: () => _onNavItemTapped(7),
+                      selectedIndex: selectedIndex,
+                      isCollapsed: isCollapsed,
+                    ),
                   ],
                 ),
               ),
@@ -104,101 +170,4 @@ class _SabitouNavigationBarState extends State<SabitouNavigationBar> {
       ],
     );
   }
-
-  Widget _buildNavItem(NavBarItem navBarItem, int index) {
-    bool isSelected = widget.selectedIndex == index;
-    double phorizontal = isCollapsed ? 25 : 40;
-    double mhorizontal = isCollapsed ? 0 : 15;
-
-    return InkWell(
-      onTap: () {
-        widget.onItemSelected(index);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: phorizontal),
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: mhorizontal),
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF1570EF) : Colors.transparent,
-          shape: isCollapsed ? BoxShape.circle : BoxShape.rectangle,
-          borderRadius: isCollapsed ? null : BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              navBarItem.icon,
-              color: isSelected ? Colors.white : Colors.black54,
-              size: 20,
-            ),
-            if (!isCollapsed)
-              const SizedBox(
-                  width: 10), // put some space between the lable and icon
-            if (!isCollapsed)
-              Text(
-                navBarItem.lable,
-                style: TextStyle(
-                    color: isSelected ? Colors.white : Colors.black54,
-                    fontWeight:
-                        isSelected ? FontWeight.bold : FontWeight.normal),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAdminSection() {
-    return Column(
-      children: [
-        InkWell(
-          onTap: () {
-            setState(() {
-              isAdminExpanded = !isAdminExpanded;
-            });
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Padding(padding: EdgeInsets.only(left: 50)),
-                    Icon(NavBarItem.adminPanelSettings.icon,
-                        color: Colors.black54),
-                    const SizedBox(width: 10), // sepration between the icon and the lable
-                    Text(
-                      NavBarItem.adminPanelSettings.lable,
-                      style: const TextStyle(
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: Icon(
-                    isAdminExpanded
-                        ? Icons.keyboard_arrow_down
-                        : Icons.keyboard_arrow_up,
-                    color: Colors.black54,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        if (isAdminExpanded && !isCollapsed)
-          Padding(
-            padding: const EdgeInsets.only(left: 30),
-            child: Column(
-              children: [
-                _buildNavItem(NavBarItem.person, 8),
-              ],
-            ),
-          ),
-      ],
-    );
-  }
 }
-
-
