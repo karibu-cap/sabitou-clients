@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/constants.dart';
+import '../../utils/constants.dart';
 
 /// Builds a navigation bar item.
 class NavItem extends StatelessWidget {
@@ -37,7 +37,7 @@ class NavItem extends StatelessWidget {
     /// This values specifically so they should be centralised.
     final double horizontalMargin = isCollapsed ? 0 : 15;
 
-    /// Indicates if an item is selected or not for item higlighting and updating the index.
+    /// Wether an item is selected or not for item higlighting and updating the index.
     final bool isSelected = selectedIndex == navBarItem.indx;
 
     return InkWell(
@@ -47,7 +47,9 @@ class NavItem extends StatelessWidget {
             EdgeInsets.symmetric(vertical: 10, horizontal: horizontalPadding),
         margin: EdgeInsets.symmetric(vertical: 5, horizontal: horizontalMargin),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF1570EF) : Colors.transparent,
+          color: isSelected
+              ? Theme.of(context).colorScheme.primary
+              : Colors.transparent,
           shape: isCollapsed ? BoxShape.circle : BoxShape.rectangle,
           borderRadius:
               isCollapsed ? null : const BorderRadius.all(Radius.circular(10)),
@@ -56,7 +58,8 @@ class NavItem extends StatelessWidget {
           children: [
             Icon(
               navBarItem.icon,
-              color: isSelected ? Colors.white : Colors.black54,
+              color:
+                  isSelected ? Colors.white : Theme.of(context).iconTheme.color,
               size: 20,
             ),
             if (!isCollapsed)
@@ -67,7 +70,9 @@ class NavItem extends StatelessWidget {
               Text(
                 navBarItem.lable,
                 style: TextStyle(
-                  color: isSelected ? Colors.white : Colors.black54,
+                  color: isSelected
+                      ? Colors.white
+                      : Theme.of(context).textTheme.bodySmall?.color,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
