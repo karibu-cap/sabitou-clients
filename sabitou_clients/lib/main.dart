@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'routes/app_routes.dart';
+import 'screens/connection/login.dart';
 import 'screens/registration/sign_up.dart';
 import 'services/internationalization/app_translations.dart';
 import 'services/internationalization/internationalization.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
       darkTheme: Themes.darkTheme.toTheme,
       theme: Themes.lightTheme.toTheme,
       themeMode: AppThemeService.to.themeMode,
-      home: SignUp(),
+      home: Login(),
     );
   }
 }
