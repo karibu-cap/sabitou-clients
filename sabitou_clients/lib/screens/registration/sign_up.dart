@@ -13,11 +13,12 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController companyNameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
 
-   bool _isPasswordVisible = false;
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +114,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           TextFormField(
                             controller: confirmPasswordController,
-                             obscureText: !_isPasswordVisible, 
+                            obscureText: !_isPasswordVisible,
                             decoration: InputDecoration(
                               hintText: '********',
                               suffixIcon: IconButton(
@@ -205,7 +206,8 @@ class _SignUpState extends State<SignUp> {
                             SizedBox(
                               width: 50,
                               height: 50,
-                              child: Image.asset('assets/images/googleIcon.png'),
+                              child:
+                                  Image.asset('assets/images/googleIcon.png'),
                             ),
                             Text('Sign up with Google'),
                           ],

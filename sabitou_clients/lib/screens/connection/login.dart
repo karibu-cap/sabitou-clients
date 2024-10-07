@@ -11,7 +11,7 @@ class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  
+
   bool _isPasswordVisible = false;
 
   @override
@@ -91,7 +91,7 @@ class _LoginState extends State<Login> {
                           ),
                           TextFormField(
                             controller: passwordController,
-                            obscureText: !_isPasswordVisible, 
+                            obscureText: !_isPasswordVisible,
                             decoration: InputDecoration(
                               hintText: '**********',
                               suffixIcon: IconButton(
@@ -102,8 +102,7 @@ class _LoginState extends State<Login> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    _isPasswordVisible =
-                                        !_isPasswordVisible; 
+                                    _isPasswordVisible = !_isPasswordVisible;
                                   });
                                 },
                               ),
@@ -158,7 +157,8 @@ class _LoginState extends State<Login> {
                             SizedBox(
                               width: 50,
                               height: 50,
-                              child: Image.asset('assets/images/googleIcon.png'),
+                              child:
+                                  Image.asset('assets/images/googleIcon.png'),
                             ),
                             const Text('Log in with Google'),
                           ],
