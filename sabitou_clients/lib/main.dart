@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       darkTheme: Themes.darkTheme.toTheme,
       theme: Themes.lightTheme.toTheme,
       themeMode: AppThemeService.to.themeMode,
-      home: Login(),
+      home: SignUp(),
     );
   }
 }

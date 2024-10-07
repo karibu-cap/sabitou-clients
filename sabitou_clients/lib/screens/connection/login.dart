@@ -9,9 +9,10 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +91,22 @@ class _LoginState extends State<Login> {
                           ),
                           TextFormField(
                             controller: passwordController,
-                            obscureText: true,
-                            decoration: const InputDecoration(
+                            obscureText: !_isPasswordVisible, 
+                            decoration: InputDecoration(
                               hintText: '**********',
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isPasswordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isPasswordVisible =
+                                        !_isPasswordVisible; 
+                                  });
+                                },
+                              ),
                             ),
                           ),
                           const SizedBox(height: 25),
@@ -144,7 +158,7 @@ class _LoginState extends State<Login> {
                             SizedBox(
                               width: 50,
                               height: 50,
-                              child: Image.asset('assets/images/logo.png'),
+                              child: Image.asset('assets/images/googleIcon.png'),
                             ),
                             const Text('Log in with Google'),
                           ],
