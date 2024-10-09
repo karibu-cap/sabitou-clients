@@ -38,6 +38,22 @@ class AppInternationalizationService extends GetxService {
       'en': 'Stores',
       'fr': 'Magasins',
     },
+    'dashboard': {
+      'en': 'Dashboard',
+      'fr': 'Tableau de bord',
+    },
+    'signOut': {
+      'en': 'Sign out',
+      'fr': 'Se deconnecter',
+    },
+    'setting': {
+      'en': 'Setting',
+      'fr': 'Paramètres',
+    },
+    'searchForProduct': {
+      'en': 'Search for product',
+      'fr': 'Rechercher un produit',
+    },
   };
 
   /// Direct access to the internationalization service.
@@ -55,6 +71,34 @@ class AppInternationalizationService extends GetxService {
         const Locale('en'),
         const Locale('fr'),
       ];
+
+  /// Returns the localized value of searchForProduct.
+  String get searchForProduct {
+    return _stringOfLocalizedValue(
+      'searchForProduct',
+    );
+  }
+
+  /// Returns the localized value of setting.
+  String get setting {
+    return _stringOfLocalizedValue(
+      'setting',
+    );
+  }
+
+  /// Returns the localized value of signOut.
+  String get signOut {
+    return _stringOfLocalizedValue(
+      'signOut',
+    );
+  }
+
+  /// Returns the localized value of dashboard.
+  String get dashboard {
+    return _stringOfLocalizedValue(
+      'dashboard',
+    );
+  }
 
   /// Returns the localized value of [stores].
   String get stores {
@@ -78,13 +122,19 @@ class AppInternationalizationService extends GetxService {
   }
 
   /// Changes the locale.
-  void changeLocale(Locale newLocale) {
-    if (_locale.value == newLocale) {
+  void changeLocale([Locale? newLocale]) {
+    final local = switch ((newLocale, _locale.value.languageCode)) {
+      (final Locale newLocale, _) => newLocale,
+      (null, 'en') => const Locale('fr'),
+      (_, _) => const Locale('en'),
+    };
+
+    if (_locale.value == local) {
       return;
     }
-    _locale.value = newLocale;
-    Get.updateLocale(newLocale);
-    _box.write(_key, newLocale.languageCode);
+    _locale.value = local;
+    Get.updateLocale(local);
+    _box.write(_key, local.languageCode);
   }
 
   /// Gets the translation for the given key.

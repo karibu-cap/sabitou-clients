@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const Color transparent = Colors.transparent;
   // Grey.
+  static const Color grey0 = Color.fromARGB(255, 255, 255, 255);
   static const Color grey50 = Color(0xFFF4F5FC);
   static const Color grey100 = Color(0xFFd0d3d9);
   static const Color grey200 = Color(0xFFb9bdc7);
@@ -62,4 +64,65 @@ class AppColors {
   static const Color success700 = Color(0xFF0d824b);
   static const Color success800 = Color(0xFF0a653a);
   static const Color success900 = Color(0xFF084d2d);
+
+  static const lightBackground = grey50;
+  static const lightForeground = Color(0xFF030712);
+  static const lightMuted = Color(0xFFf3f4f6);
+  static const lightMutedForeground = Color(0xFF6b7280);
+  static const lightPopover = grey50;
+  static const lightPopoverForeground = Color(0xFF030712);
+  static const lightCard = grey50;
+  static const lightCardForeground = Color(0xFF030712);
+  static const lightBorder = grey100;
+  static const lightInput = grey100;
+  static const lightPrimary = Color(0xFF7c3aed);
+  static const lightPrimaryForeground = grey50;
+  static const lightSecondary = grey50;
+  static const lightSecondaryForeground = Color(0xFF111827);
+  static const lightAccent = grey50;
+  static const lightAccentForeground = Color(0xFF111827);
+  static const lightDestructive = Color(0xFFEF4444);
+  static const lightDestructiveForeground = Color(0xFFF8FAFC);
+  static const lightRing = Color(0xFF7c3aed);
+
+  static const darkBackground = Color(0xFF030712);
+  static const darkForeground = grey50;
+  static const darkMuted = Color(0xFF1f2937);
+  static const darkMutedForeground = Color(0xFF9ca3af);
+  static const darkPopover = Color(0xFF030712);
+  static const darkPopoverForeground = grey50;
+  static const darkCard = Color(0xFF030712);
+  static const darkCardForeground = grey50;
+  static const darkBorder = Color(0xFF1f2937);
+  static const darkInput = Color(0xFF1f2937);
+  static const darkPrimary = Color(0xFF6d28d9);
+  static const darkPrimaryForeground = grey50;
+  static const darkSecondary = Color(0xFF1f2937);
+  static const darkSecondaryForeground = grey50;
+  static const darkAccent = Color(0xFF1E293B);
+  static const darkAccentForeground = grey50;
+  static const darkDestructive = Color(0xFF7f1d1d);
+  static const darkDestructiveForeground = grey50;
+  static const darkRing = Color(0xFF6d28d9);
+
+  static const darkBackgroundGradient = LinearGradient(
+    colors: [
+      Color(0xFF030712),
+      darkSecondary,
+    ],
+  );
+  static const lightBackgroundGradient = LinearGradient(
+    colors: [
+      Color(0xFF7928CA),
+      Color(0xFFFF0080),
+    ],
+  );
+
+  /// The gradient button.
+  static const gradientButton = LinearGradient(
+    colors: [
+      Color(0xFF7928CA),
+      Color(0xFFFF0080),
+    ],
+  );
 }

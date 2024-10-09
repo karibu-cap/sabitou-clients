@@ -8,7 +8,7 @@ abstract class PagesRoutesWithParams<T> {
 }
 
 /// Interface for routes without parameters.
-abstract class PagesRoutesNoParams {
+abstract class PagesRoutesWithNoParams {
   /// Returns the pattern URL associated with the route.
   String get pattern;
 
@@ -26,19 +26,59 @@ abstract class PagesRoutes {
 
   /// The transfer route For example: http://localhost:8080/registration.
   static final registration = _RegistrationRoute();
+
+  /// The dashboard route, for example, http:localhost:8080/stores.
+  static final stores = _StoresRoute();
+
+  /// The dashboard route, for example, http:localhost:8080/dashboard.
+  static final dashboard = _DashboardRoute();
 }
 
-class _HomeRoute extends PagesRoutesNoParams {
+class _HomeRoute extends PagesRoutesWithNoParams {
   @override
   String get pattern => '/';
 }
 
-class _ConnectionRoute extends PagesRoutesNoParams {
+class _ConnectionRoute extends PagesRoutesWithNoParams {
   @override
   String get pattern => '/connection';
 }
 
-class _RegistrationRoute extends PagesRoutesNoParams {
+class _RegistrationRoute extends PagesRoutesWithNoParams {
   @override
   String get pattern => '/registration';
+}
+
+class _StoresRoute extends PagesRoutesWithNoParams {
+  @override
+  String get pattern => '/stocks';
+}
+
+class _DashboardRoute extends PagesRoutesWithNoParams {
+  @override
+  String get pattern => '/dashboard';
+}
+
+/// The dashboard parameters.
+class DashboardParameters {
+  /// The key of the item.
+  static const String keyItem = 'item';
+
+  /// The item label.
+  final String? itemLabel;
+
+  /// Constructors of new [DashboardParameters].
+  DashboardParameters({this.itemLabel});
+}
+
+/// The dashboard items.
+enum DashboardLabelPage {
+  /// The dashboard store.
+  dashboard,
+
+  /// The dashboard store.
+  stores,
+
+  /// The dashboard settings.
+  settings,
 }

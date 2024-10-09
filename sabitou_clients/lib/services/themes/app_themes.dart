@@ -49,7 +49,9 @@ class AppThemeService extends GetxService {
   /// Switches the theme mode between light and dark, and saves it to the storage.
   void switchTheme() {
     _isDarkMode.value = !_isDarkMode.value;
-    Get.changeThemeMode(_isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
+    Get
+      ..changeThemeMode(_isDarkMode.value ? ThemeMode.dark : ThemeMode.light)
+      ..changeTheme(_isDarkMode.value ? darkTheme : lightTheme);
     _saveThemeToBox(_isDarkMode.value);
   }
 }
