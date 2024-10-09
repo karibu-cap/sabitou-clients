@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'routes/app_routes.dart';
+import 'routes/pages_routes.dart';
 import 'services/internationalization/app_translations.dart';
 import 'services/internationalization/internationalization.dart';
 import 'services/storage/app_storate.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppInternationalizationService.supportedLocales,
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en'),
+      initialRoute: PagesRoutes.dashboard.pattern,
       getPages: AppRouter.pageRoutes,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

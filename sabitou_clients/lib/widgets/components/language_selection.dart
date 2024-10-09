@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../services/internationalization/internationalization.dart';
+import '../../services/themes/app_themes.dart';
+import '../../themes/app_colors.dart';
 
 /// A beautiful language selection component.
 final class CPLanguageSelection extends StatelessWidget {
@@ -10,47 +12,45 @@ final class CPLanguageSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          color: Theme.of(context).cardColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: PopupMenuButton<String>(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(8),
-            ),
+      () => InkWell(
+        onTap: () => AppInternationalizationService.to.changeLocale(),
+        child: Container(
+          constraints: const BoxConstraints(
+            maxWidth: 70,
+            maxHeight: 35,
           ),
-          onSelected: (value) =>
-              AppInternationalizationService.to.changeLocale(Locale(value)),
-          itemBuilder: (context) =>
-              AppInternationalizationService.supportedLocales
-                  .map(
-                    (e) => PopupMenuItem<String>(
-                      value: e.languageCode,
-                      child: Text(e.languageCode),
-                    ),
-                  )
-                  .toList(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  AppInternationalizationService.to.locale.languageCode,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
+            color: AppThemeService.to.isDarkMode
+                ? AppColors.grey900
+                : AppColors.grey100,
+          ),
+          child: AnimatedAlign(
+            duration: const Duration(milliseconds: 300),
+            alignment:
+                AppInternationalizationService.to.locale.languageCode == 'en'
+                    ? Alignment.centerRight
+                    : Alignment.centerLeft,
+            child: Container(
+              constraints: const BoxConstraints(
+                maxWidth: 35,
+                maxHeight: 35,
+              ),
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppThemeService.to.isDarkMode
+                    ? AppColors.grey800
+                    : AppColors.grey50,
+              ),
+              child: Center(
+                child: Text(
+                  AppInternationalizationService.to.locale.languageCode == 'en'
+                      ? 'en'
+                      : 'fr',
                 ),
-                const SizedBox(width: 8),
-                const Icon(Icons.arrow_drop_down),
-              ],
+              ),
             ),
           ),
         ),

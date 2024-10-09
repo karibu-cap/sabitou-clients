@@ -15,8 +15,10 @@ class CPThemeSwitcher extends StatelessWidget {
       () => GestureDetector(
         onTap: AppThemeService.to.switchTheme,
         child: Container(
-          width: 70,
-          height: 35,
+          constraints: const BoxConstraints(
+            maxWidth: 70,
+            maxHeight: 35,
+          ),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(25)),
             color: AppThemeService.to.isDarkMode

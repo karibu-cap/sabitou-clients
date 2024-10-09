@@ -1,25 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../screens/connection/connection_view.dart';
 import '../screens/dashboard/dashboard_view.dart';
+import '../screens/middleware_page.dart';
 import '../screens/registration/registration_view.dart';
-import '../utils/constants.dart';
-import 'middleware_page.dart';
+import '../screens/stores/stores_view.dart';
 import 'pages_routes.dart';
 
 /// The app routes.
 final class AppRouter {
   /// The list of app routes.
   static List<GetPage<dynamic>> get pageRoutes => [
-        GetPage(
-          name: PagesRoutes.home.pattern,
-          middlewares: [HomeMiddleware()],
-          page: () => const MiddlewarePage(
-            child: DashboardView(),
-          ),
-        ),
         GetPage(
           name: PagesRoutes.connection.pattern,
           page: () => const MiddlewarePage(
@@ -32,11 +23,47 @@ final class AppRouter {
             child: RegistrationView(),
           ),
         ),
+        GetPage(
+          name: PagesRoutes.dashboard.pattern,
+          preventDuplicates: false,
+          transition: Transition.noTransition,
+          page: () => const MiddlewarePage(
+            child: DashboardView(),
+          ),
+        ),
+        GetPage(
+          name: PagesRoutes.stores.pattern,
+          transition: Transition.noTransition,
+          page: () {
+            return const MiddlewarePage(
+              child: StoresView(),
+            );
+          },
+        ),
       ];
 
+  /// Gets the current route name.
+  static String get getCurrentLocation {
+    return Get.currentRoute;
+  }
+
+  /// Checks if there are routes to pop.
+  static bool get canPop {
+    return Get.key.currentState?.canPop() ?? false;
+  }
+
   /// Navigates to nex page.
-  static void push(String uri, {Object? extra}) {
-    Get.toNamed(uri, arguments: extra);
+  static void push(
+    String uri, {
+    Object? extra,
+    Map<String, String>? parameters,
+  }) {
+    Get.toNamed(
+      uri,
+      arguments: extra,
+      preventDuplicates: false,
+      parameters: parameters,
+    );
   }
 
   /// Navigates to next page and replace all the stack page.
@@ -52,36 +79,8 @@ final class AppRouter {
     Get.offNamed(uri, arguments: extra);
   }
 
-  /// Gets the current route name.
-  static String getCurrentLocation() {
-    return Get.currentRoute;
-  }
-
-  /// Checks if there are routes to pop.
-  static bool canPop() {
-    return Get.key.currentState?.canPop() ?? false;
-  }
-
   /// Pops the current route.
   static void onPop() {
     Get.back();
-  }
-}
-
-/// The first open time middleware.
-class HomeMiddleware extends GetMiddleware {
-  final _box = GetStorage();
-
-  @override
-  RouteSettings? redirect(String? route) {
-    final bool isFirstOpenTime =
-        _box.read(PreferencesKey.isFirstOpenTime) ?? true;
-
-    if (isFirstOpenTime) {
-      return RouteSettings(name: PagesRoutes.connection.pattern);
-    }
-
-    /// [TODO] verify whether the user is registered or not.
-    return null;
   }
 }
