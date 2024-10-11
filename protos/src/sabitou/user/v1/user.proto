@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package user.v1;
+
+option go_package = "user/v1;userv1";
+
+service UserService {
+    rpc CreateUser (CreateUserRequest) returns (User) {}
+    rpc GetUser (GetUserRequest) returns (User) {}
+}
+
+enum ConnectionType {
+  UNRECOGNIZED = 0;
+  EMAIL = 1;
+  GOOGLE = 2;
+}
+
+message User {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+    // TODO: Encode the user password.
+    optional string password = 5;
+    ConnectionType connection_type = 6;
+  }
+
+message CreateUserRequest {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+    // In case of google connection, the password can be empty. 
+    optional string password = 5;
+    ConnectionType connection_type = 6;
+  }
+
+message GetUserRequest {
+    optional string id = 1;
+    optional string email = 2;
+    optional string password = 3;
+}
+  
