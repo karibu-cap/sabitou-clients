@@ -11,7 +11,7 @@
 .fvm/
 migrate_working_dir/
 .history
-
+*.db
 
 # IntelliJ related
 *.iml
