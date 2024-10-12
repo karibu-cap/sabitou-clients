@@ -6,10 +6,12 @@ import 'package:get_storage/get_storage.dart';
 
 import 'routes/app_routes.dart';
 import 'routes/pages_routes.dart';
+import 'services/grpc/grpc.dart';
 import 'services/internationalization/app_translations.dart';
 import 'services/internationalization/internationalization.dart';
 import 'services/storage/app_storate.dart';
 import 'services/themes/app_themes.dart';
+import 'services/user_service_client.dart';
 import 'themes/themes.dart';
 import 'utils/constants.dart';
 
@@ -79,4 +81,12 @@ Future<void> _initServices() async {
   final themeService = AppThemeService(appStorage);
   Get.put<AppThemeService>(themeService, permanent: true);
   await themeService.init();
+
+  /// Register the grpc service.
+  final grpc = Get.put<GrpcService>(GrpcService(), permanent: true);
+
+  /// Register of userService.
+  Get.lazyPut<UserClientService>(
+    () => UserClientService(clientChannel: grpc.clientChannel),
+  );
 }
