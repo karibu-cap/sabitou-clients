@@ -1,0 +1,31 @@
+# Server configuration
+server:
+  grpc:
+    port: 50051
+  grpc_web:
+    port: 50052
+
+# Database configuration
+database:
+  driver: "sqlite3"
+  db_name: "sabitou.db"
+
+# CORS configuration
+cors:
+  allowed_origins:
+    - "*" # For development. Replace with specific origins in production.
+  allowed_methods:
+    - "GET"
+    - "POST"
+    - "OPTIONS"
+  allowed_headers:
+    - "*"
+  exposed_headers:
+    - "grpc-status"
+    - "grpc-message"
+  allow_credentials: true
+
+# Authentication configuration (placeholder for Eartho)
+auth:
+  provider: "eartho"
+  # Add Eartho-specific configurations here when implemented
