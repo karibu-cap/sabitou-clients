@@ -16,11 +16,11 @@ import (
 func main() {
 	flag.Parse()
 
-	config, err := config.LoadConfig("configs/config.yml")
+	config, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalf("Failed to load configuration: %v", err)
 	}
-	log.Printf("Starting server with configuration: %v", config)
+
 	// Use config values
 	port := config.Server.GRPC.Port
 	webPort := config.Server.GRPCWeb.Port
