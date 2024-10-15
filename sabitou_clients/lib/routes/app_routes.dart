@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../screens/connection/connection_view.dart';
 import '../screens/dashboard/dashboard_view.dart';
 import '../screens/middleware_page.dart';
+import '../screens/profile/profile_view.dart';
 import '../screens/registration/registration_view.dart';
 import '../screens/stores/stores_view.dart';
 import 'pages_routes.dart';
@@ -37,6 +38,15 @@ final class AppRouter {
           page: () {
             return const MiddlewarePage(
               child: StoresView(),
+            );
+          },
+        ),
+        GetPage(
+          name: PagesRoutes.profile.pattern,
+          transition: Transition.noTransition,
+          page: () {
+            return const MiddlewarePage(
+              child: ProfileView(),
             );
           },
         ),
