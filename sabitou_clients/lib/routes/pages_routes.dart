@@ -32,6 +32,9 @@ abstract class PagesRoutes {
 
   /// The dashboard route, for example, http:localhost:8080/dashboard.
   static final dashboard = _DashboardRoute();
+
+  /// The profile route, for example, http:localhost:8080/profile.
+  static final profile = _ProfileRoute();
 }
 
 class _HomeRoute extends PagesRoutesWithNoParams {
@@ -59,6 +62,11 @@ class _DashboardRoute extends PagesRoutesWithNoParams {
   String get pattern => '/dashboard';
 }
 
+class _ProfileRoute extends PagesRoutesWithNoParams {
+  @override
+  String get pattern => '/user';
+}
+
 /// The dashboard parameters.
 class DashboardParameters {
   /// The key of the item.
@@ -81,4 +89,7 @@ enum DashboardLabelPage {
 
   /// The dashboard settings.
   settings,
+
+  /// The user profile.
+  profile,
 }
