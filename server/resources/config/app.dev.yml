@@ -7,8 +7,11 @@ server:
 
 # Database configuration
 database:
-  driver: "sqlite3"
-  db_name: "sabitou.db"
+  driver: "surrealdb"
+  db_name: "sabitou"
+  db_user: "root"
+  db_pass: "root"
+  db_url: "ws://localhost:8000/rpc"
 
 # CORS configuration
 cors:

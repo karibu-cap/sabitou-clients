@@ -23,6 +23,9 @@ type Config struct {
 	Database struct {
 		Driver string `yaml:"driver"`
 		DbName string `yaml:"db_name"`
+		DbUser string `yaml:"db_user"`
+		DbPass string `yaml:"db_pass"`
+		DbUrl  string `yaml:"db_url"`
 	} `yaml:"database"`
 	Cors struct {
 		AllowedOrigins   []string `yaml:"allowed_origins"`
@@ -36,23 +39,14 @@ type Config struct {
 	} `yaml:"auth"`
 }
 
-const (
-	// DEV represents development environment
-	DEV = "develop"
-	// PRD represents production environment
-	PRD = "production"
-)
-
-func LoadConfig() (*Config, error) {
+func LoadConfig() (*string, *Config, error) {
 	config := &Config{}
 
-	if len(os.Args) < 2 {
-		log.Fatal("Please specify an environment: dev or prod")
+	env, exists := os.LookupEnv("ENV")
+	if !exists {
+		log.Fatal("Define environment variable with dev or prod")
 	}
-
-	env := os.Args[1]
 	var envFile string
-
 	// Determine which .env file to load
 	switch env {
 	case "dev":
@@ -66,18 +60,18 @@ func LoadConfig() (*Config, error) {
 	// Load the environment variables from the specified .env file
 	err := godotenv.Load(envFile)
 	if err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
+		log.Printf("Error loading .env file: %v", err)
 	}
 
 	data, err := os.ReadFile(fmt.Sprintf(AppConfigPath, env))
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	err = yaml.Unmarshal(data, config)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	return config, nil
+	return &env, config, nil
 }

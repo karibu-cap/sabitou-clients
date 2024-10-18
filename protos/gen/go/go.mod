@@ -1,4 +1,4 @@
-module sabitou-go
+module sabitou
 
 go 1.23.2
 
