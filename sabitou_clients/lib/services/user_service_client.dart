@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:grpc/grpc_or_grpcweb.dart';
-import 'package:sabitou_dart/user/v1/user.pbgrpc.dart';
+import 'package:sabitou_dart/proto/user/v1/user.pbgrpc.dart';
 
 import '../utils/logger.dart';
 
@@ -24,9 +24,9 @@ final class UserClientService extends GetxService {
         );
 
   /// Creates a new user.
-  Future<User?> createUser({required CreateUserRequest request}) async {
+  Future<String?> createUser({required CreateUserRequest request}) async {
     try {
-      final user = await userClientService.createUser(
+      final result = await userClientService.createUser(
         CreateUserRequest()
           ..firstName = request.firstName
           ..lastName = request.lastName
@@ -39,7 +39,31 @@ final class UserClientService extends GetxService {
         'Created user: ${request.writeToJson()}.',
       );
 
-      return user;
+      return result.id;
+    } on Exception catch (e) {
+      _logger.severe('Caught error: $e');
+
+      return null;
+    } finally {
+      await clientChannel.shutdown();
+    }
+  }
+
+  /// Retrieves a user by ID or email and password.
+  Future<User?> getUser({required GetUserRequest request}) async {
+    try {
+      final result = await userClientService.getUser(
+        GetUserRequest()
+          ..id = request.id
+          ..email = request.email
+          ..password = request.password,
+      );
+
+      _logger.log(
+        'Retrieved user: ${result.user.writeToJson()}.',
+      );
+
+      return result.user;
     } on Exception catch (e) {
       _logger.severe('Caught error: $e');
 

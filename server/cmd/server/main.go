@@ -3,12 +3,13 @@ package main
 import (
 	"flag"
 	"log"
-	userv1 "sabitou-go/user/v1"
+	"os"
 
-	config "sabitou/configs"
-	"sabitou/internal/database"
-	grpc_server "sabitou/internal/grpc"
-	"sabitou/internal/services"
+	config "server/configs"
+	"server/internal/database"
+	grpc_server "server/internal/grpc"
+	"server/internal/repositories"
+	"server/internal/services"
 
 	"google.golang.org/grpc"
 )
@@ -16,28 +17,44 @@ import (
 func main() {
 	flag.Parse()
 
-	config, err := config.LoadConfig()
+	_, config, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalf("Failed to load configuration: %v", err)
 	}
+	db, err := database.InitDB(config.Database.DbName, config.Database.DbUser, config.Database.DbPass, config.Database.DbUrl)
 
-	// Use config values
-	port := config.Server.GRPC.Port
-	webPort := config.Server.GRPCWeb.Port
-	dbName := config.Database.DbName
-
-	db, err := database.InitDB(dbName)
 	if err != nil {
-		log.Fatalf("Failed to initialize database: %v", err)
+		log.Fatalf("Failed to connect to database: %v", err)
 	}
 	defer db.Close()
+
+	repo, err := repositories.NewRepository(db)
+	if err != nil {
+		panic(err)
+	}
+
 	grpcServer := grpc.NewServer()
 
-	// Register the user services.
-	userService := services.NewUserService(db)
-	userv1.RegisterUserServiceServer(grpcServer, userService)
+	// Register the services.
+	services.RegisterUserService(grpcServer, repo, db)
+	services.RegisterMediaService(grpcServer, repo)
+	services.RegisterArticleService(grpcServer, repo)
+	services.RegisterArticleCategoryService(grpcServer, repo)
+	services.RegisterBusinessService(grpcServer, repo)
+	services.RegisterBusinessUserService(grpcServer, repo)
+	services.RegisterBusinessArticleService(grpcServer, repo)
+	services.RegisterStoreService(grpcServer, repo)
+	services.RegisterStoreUserService(grpcServer, repo)
+	services.RegisterInventoryService(grpcServer, repo)
+	services.RegisterPaymentService(grpcServer, repo)
+	services.RegisterOrderService(grpcServer, repo)
+
+	if os.Getenv("SEED") == "true" {
+		database.SeedDatabase(db)
+	}
 
 	// Start gRPC server
-	grpc_server.StartGRPCServer(grpcServer, &port, &webPort)
+	grpc_server.StartGRPCServer(grpcServer, &config.Server.GRPC.Port, &config.Server.GRPCWeb.Port)
 
+	select {}
 }

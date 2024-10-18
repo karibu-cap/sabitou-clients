@@ -1,31 +1,38 @@
 package database
 
 import (
-	"database/sql"
+	"fmt"
 
-	_ "github.com/mattn/go-sqlite3"
+	"github.com/surrealdb/surrealdb.go"
 )
 
-func InitDB(dbPath string) (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", dbPath)
+func InitDB(dbName, dbUser, dbPassword, dbUrl string) (*surrealdb.DB, error) {
+
+	db, err := surrealdb.New(dbUrl)
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
 
-	// Initialize database schema
-	_, err = db.Exec(`
-		CREATE TABLE IF NOT EXISTS users (
-			id TEXT PRIMARY KEY,
-			first_name TEXT NOT NULL,
-			last_name TEXT NOT NULL,
-			email TEXT UNIQUE NOT NULL,
-			password TEXT,
-			connection_type TEXT NOT NULL
-		);
-	`)
-	if err != nil {
-		return nil, err
+	if _, err = db.Signin(map[string]interface{}{
+		"user": dbUser,
+		"pass": dbPassword,
+	}); err != nil {
+		panic(err)
+	}
+
+	if err := createDatabase(db, dbName); err != nil {
+		fmt.Printf("Error creating database: %v\n", err)
+		panic(err)
 	}
 
 	return db, nil
+}
+
+func createDatabase(db *surrealdb.DB, dbName string) error {
+	// Create database if not exists
+	if _, err := db.Use(dbName, dbName); err != nil {
+		return err
+	}
+
+	return nil
 }
