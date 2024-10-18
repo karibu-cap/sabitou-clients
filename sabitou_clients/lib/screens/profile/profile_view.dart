@@ -17,9 +17,8 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasePageView(
       itemPage: DashboardLabelPage.profile.name,
-      child: const Center(
-        child: _ProfileBody(),
-      ),
+      child: const _ProfileBody(),
+      
     );
   }
 }
@@ -67,6 +66,7 @@ class _ProfileBody extends StatelessWidget {
             ],
           ),
           const _Spacer(),
+
           LayoutBuilder(
             builder: (context, constraints) {
               return Row(
@@ -87,8 +87,10 @@ class _ProfileBody extends StatelessWidget {
             },
           ),
           const SizedBox(height: 16.0),
+
           _NameFields(firstName: user.firstName, lastName: user.lastName),
           const _Spacer(),
+
           Text(
             AppInternationalizationService.to.contactEmail,
             style: const TextStyle(fontWeight: FontWeight.bold),
@@ -97,15 +99,19 @@ class _ProfileBody extends StatelessWidget {
             AppInternationalizationService.to.manageYourAccountEmailAddress,
           ),
           const SizedBox(height: 16.0),
+
           _EmailPasswordFields(
             email: user.email,
             password: user.password,
           ),
           const _Spacer(),
+
           _BusinessSection(business: user.business, isAdmin: isAdmin),
           const SizedBox(height: 10.0),
+
           _StoreSection(store: user.store, isAdmin: isAdmin),
           const SizedBox(height: 16.0),
+
           Text(
             AppInternationalizationService.to.accountSecurity,
             style: const TextStyle(fontWeight: FontWeight.bold),
@@ -244,7 +250,7 @@ class _NameFields extends StatelessWidget {
           children: [
             SizedBox(
               width: !appLayout.isMobile
-                  ? (constraints.maxWidth / 2 - 8)
+                  ? ((constraints.maxWidth / 2) - 8)
                   : double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,7 +295,7 @@ class _NameFields extends StatelessWidget {
             ),
             SizedBox(
               width: !appLayout.isMobile
-                  ? (constraints.maxWidth / 2 - 8)
+                  ? ((constraints.maxWidth / 2) - 8)
                   : double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -365,7 +371,7 @@ class _EmailPasswordFields extends StatelessWidget {
           children: [
             SizedBox(
               width: !appLayout.isMobile
-                  ? (constraints.maxWidth / 2 - 8)
+                  ? ((constraints.maxWidth / 2) - 8)
                   : double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -411,7 +417,7 @@ class _EmailPasswordFields extends StatelessWidget {
             ),
             SizedBox(
               width: !appLayout.isMobile
-                  ? (constraints.maxWidth / 2 - 8)
+                  ? ((constraints.maxWidth / 2) - 8)
                   : double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -622,7 +628,8 @@ class _StoreSection extends StatelessWidget {
   }
 }
 
-/// Mock user data.
+/// Temporal mock user data.
+
 class User {
   final String imageUrl;
   final String id;
