@@ -625,22 +625,31 @@ class _StoreSection extends StatelessWidget {
 class User {
   /// Temporal mock user data.
   final String imageUrl;
+
   /// Temporal mock user data.
   final String id;
+
   /// Temporal mock user data.
   final String firstName;
+
   /// Temporal mock user data.
   final String lastName;
+
   /// Temporal mock user data.
   final String email;
+
   /// Temporal mock user data.
   final String contact;
+
   /// Temporal mock user data.
   final String business;
+
   /// Temporal mock user data.
   final UserType role;
+
   /// Temporal mock user data.
   final String store;
+
   /// Temporal mock user data.
   final String password;
 
@@ -691,6 +700,7 @@ final manUser = User(
 enum UserType {
   /// Temporal mock user data.
   admin,
+
   /// Temporal mock user data.
   manager,
 }
