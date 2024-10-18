@@ -5,7 +5,6 @@ import 'package:sabitou_clients/screens/profile/profile_view.dart';
 
 import '../../goldens.dart';
 
-
 class CreateProfileViewWidgetds extends StatelessWidget {
   const CreateProfileViewWidgetds({super.key});
 
