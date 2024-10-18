@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../routes/pages_routes.dart';
+import '../../services/internationalization/internationalization.dart';
 import '../../themes/app_colors.dart';
 import '../../utils/app_layout.dart';
 import '../../widgets/base_page.dart';
@@ -9,6 +10,7 @@ import '../../widgets/components/sb_container.dart';
 
 /// User profile screen.
 class ProfileView extends StatelessWidget {
+  /// Constructor of profile view.
   const ProfileView({super.key});
 
   @override
@@ -29,9 +31,10 @@ class _ProfileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final User user = adminUser;
     final bool isAdmin = user.role == UserType.admin;
+    final AppLayout appLayout = AppLayout(context);
 
     return Padding(
-      padding: const EdgeInsets.all(50.0),
+      padding: EdgeInsets.all(appLayout.isMobile ? 20.0 : 50.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -41,21 +44,24 @@ class _ProfileBody extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Account',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Text(
+                    AppInternationalizationService.to.account,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    isAdmin ? 'Admin Manager' : 'Inventory Manager',
+                    isAdmin
+                        ? AppInternationalizationService.to.adminManager
+                        : AppInternationalizationService.to.inventoryManager,
                   ),
                 ],
               ),
               if (isAdmin)
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(
-                    Icons.person_add_alt_1,
-                    color: Colors.blue,
+                  icon: Image.asset(
+                    'assets/images/Person_edit.png',
+                    width: 35.0,
+                    height: 35.0,
                   ),
                 ),
             ],
@@ -83,12 +89,12 @@ class _ProfileBody extends StatelessWidget {
           const SizedBox(height: 16.0),
           _NameFields(firstName: user.firstName, lastName: user.lastName),
           const _Spacer(),
-          const Text(
-            'Contact Email',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Text(
+            AppInternationalizationService.to.contactEmail,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          const Text(
-            'Manage your account email address',
+          Text(
+            AppInternationalizationService.to.manageYourAccountEmailAddress,
           ),
           const SizedBox(height: 16.0),
           _EmailPasswordFields(
@@ -100,12 +106,12 @@ class _ProfileBody extends StatelessWidget {
           const SizedBox(height: 10.0),
           _StoreSection(store: user.store, isAdmin: isAdmin),
           const SizedBox(height: 16.0),
-          const Text(
-            'Account Security',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Text(
+            AppInternationalizationService.to.accountSecurity,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          const Text(
-            'Manage your account security',
+          Text(
+            AppInternationalizationService.to.manageYourAccountSecurity,
           ),
         ],
       ),
@@ -184,14 +190,14 @@ class _AvatarEditButtons extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               fixedSize: Size(
-                (MediaQuery.sizeOf(context).width * 0.3).clamp(90, 250),
+                (MediaQuery.sizeOf(context).width * 0.4).clamp(90, 250),
                 appLayout.isMobile
-                ? (MediaQuery.sizeOf(context).height * 0.08).clamp(50, 100)
-                : 50,
+                    ? (MediaQuery.sizeOf(context).height * 0.1).clamp(50, 100)
+                    : 50,
               ),
             ),
-            child: const Text(
-              'Upload New Picture',
+            child: Text(
+              AppInternationalizationService.to.uploadNewPicture,
               textAlign: TextAlign.center,
             ),
           ),
@@ -200,11 +206,16 @@ class _AvatarEditButtons extends StatelessWidget {
             onPressed: () {},
             style: OutlinedButton.styleFrom(
               fixedSize: Size(
-                (MediaQuery.sizeOf(context).width * 0.3).clamp(90, 250),
-                50,
+                (MediaQuery.sizeOf(context).width * 0.4).clamp(90, 250),
+                appLayout.isMobile
+                    ? (MediaQuery.sizeOf(context).height * 0.1).clamp(50, 100)
+                    : 50,
               ),
             ),
-            child: const Text('Delete Picture', textAlign: TextAlign.center),
+            child: Text(
+              AppInternationalizationService.to.deletePicture,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),
@@ -225,18 +236,20 @@ class _NameFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-            final AppLayout appLayout = AppLayout(context);
+        final AppLayout appLayout = AppLayout(context);
 
         return Wrap(
           runSpacing: 16.0,
           spacing: 16.0,
           children: [
             SizedBox(
-              width: !appLayout.isMobile ? (constraints.maxWidth / 2 - 8) : double.infinity,
+              width: !appLayout.isMobile
+                  ? (constraints.maxWidth / 2 - 8)
+                  : double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('First Name'),
+                  Text(AppInternationalizationService.to.firstName),
                   TextField(
                     controller: TextEditingController(text: firstName),
                     readOnly: true,
@@ -244,37 +257,44 @@ class _NameFields extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.grey.shade400,
-                          width: 2.0,        
+                          width: 2.0,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.grey.shade400, 
+                          color: Colors.grey.shade400,
                           width: 2.0,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
                       ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.shade400,
-                            width: 2.5,
-                          ),
-                          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        borderSide: BorderSide(
+                          color: Colors.grey.shade400,
+                          width: 2.5,
                         ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
+                      ),
                       contentPadding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 10.0,),
+                        vertical: 15.0,
+                        horizontal: 10.0,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              width: !appLayout.isMobile ? (constraints.maxWidth / 2 - 8) : double.infinity,
+              width: !appLayout.isMobile
+                  ? (constraints.maxWidth / 2 - 8)
+                  : double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Last Name'),
+                  Text(AppInternationalizationService.to.lastName),
                   TextField(
                     controller: TextEditingController(text: lastName),
                     readOnly: true,
@@ -284,24 +304,29 @@ class _NameFields extends StatelessWidget {
                           color: Colors.grey.shade400,
                           width: 2.0,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.grey.shade400,
                           width: 2.0,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
                       ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.shade400,
-                            width: 2.5,
-                          ),
-                          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        borderSide: BorderSide(
+                          color: Colors.grey.shade400,
+                          width: 2.5,
                         ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
+                      ),
                       contentPadding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 10.0,),
+                        vertical: 15.0,
+                        horizontal: 10.0,
+                      ),
                     ),
                   ),
                 ],
@@ -332,18 +357,20 @@ class _EmailPasswordFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-    final AppLayout appLayout = AppLayout(context);
+        final AppLayout appLayout = AppLayout(context);
 
         return Wrap(
           runSpacing: 16.0,
           spacing: 16.0,
           children: [
             SizedBox(
-              width: !appLayout.isMobile ? (constraints.maxWidth / 2 - 8) : double.infinity,
+              width: !appLayout.isMobile
+                  ? (constraints.maxWidth / 2 - 8)
+                  : double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Email'),
+                  Text(AppInternationalizationService.to.email),
                   TextField(
                     controller: TextEditingController(text: email),
                     readOnly: true,
@@ -351,25 +378,31 @@ class _EmailPasswordFields extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.grey.shade400,
-                          width: 2.0,         
+                          width: 2.0,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.grey.shade400,
                           width: 2.0,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
                       ),
-                     focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.shade400,
-                            width: 2.5,
-                          ),
-                          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.grey.shade400,
+                          width: 2.5,
                         ),
-                      contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 15.0,
+                        horizontal: 10.0,
+                      ),
                       prefixIcon: const Icon(Icons.email_outlined),
                     ),
                   ),
@@ -377,11 +410,13 @@ class _EmailPasswordFields extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: !appLayout.isMobile ? (constraints.maxWidth / 2 - 8) : double.infinity,
+              width: !appLayout.isMobile
+                  ? (constraints.maxWidth / 2 - 8)
+                  : double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Password'),
+                  Text(AppInternationalizationService.to.password),
                   Obx(
                     () => TextField(
                       controller: TextEditingController(text: password),
@@ -393,26 +428,34 @@ class _EmailPasswordFields extends StatelessWidget {
                             color: Colors.grey.shade400,
                             width: 2.0,
                           ),
-                          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8.0)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.grey.shade400,
                             width: 2.0,
                           ),
-                          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8.0)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.grey.shade400,
                             width: 2.5,
                           ),
-                          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8.0)),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 15.0,
+                          horizontal: 10.0,
+                        ),
                         prefixIcon: IconButton(
                           icon: Icon(
-                            isPasswordVisible.value ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                            isPasswordVisible.value
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
                           ),
                           onPressed: _togglePassword,
                         ),
@@ -444,7 +487,6 @@ class _Spacer extends StatelessWidget {
   }
 }
 
-
 class _BusinessSection extends StatelessWidget {
   final String business;
   final bool isAdmin;
@@ -458,17 +500,17 @@ class _BusinessSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Business',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        Text(
+          AppInternationalizationService.to.business,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        const Text('Manage your business'),
+        Text(AppInternationalizationService.to.manageYourBusiness),
         const SizedBox(
           height: 5.0,
         ),
         Wrap(
           runSpacing: 16.0,
-            spacing: 16.0,
+          spacing: 16.0,
           children: [
             OutlinedButton(
               onPressed: () {},
@@ -485,6 +527,7 @@ class _BusinessSection extends StatelessWidget {
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(width: 16.0),
@@ -497,12 +540,12 @@ class _BusinessSection extends StatelessWidget {
                     horizontal: 24.0,
                   ),
                 ),
-                child: const Text(
-                  'Change the business',
-                  style: TextStyle(
-                    color: Colors.white,
+                child: Text(
+                  AppInternationalizationService.to.changeTheBusiness,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
           ],
@@ -511,7 +554,6 @@ class _BusinessSection extends StatelessWidget {
     );
   }
 }
-
 
 class _StoreSection extends StatelessWidget {
   final String store;
@@ -526,11 +568,12 @@ class _StoreSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Store',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        Text(
+          AppInternationalizationService.to.store,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
         ),
-        const Text('Manage the store'),
+        Text(AppInternationalizationService.to.manageTheStore),
         const SizedBox(height: 5.0),
         Wrap(
           runSpacing: 16.0,
@@ -551,6 +594,7 @@ class _StoreSection extends StatelessWidget {
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(width: 16.0),
@@ -563,12 +607,12 @@ class _StoreSection extends StatelessWidget {
                     horizontal: 24.0,
                   ),
                 ),
-                child: const Text(
-                  'Change the store',
-                  style: TextStyle(
-                    color: Colors.white,
+                child: Text(
+                  AppInternationalizationService.to.changeTheStore,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
           ],
@@ -577,7 +621,6 @@ class _StoreSection extends StatelessWidget {
     );
   }
 }
-
 
 /// Mock user data.
 class User {
@@ -614,7 +657,7 @@ final adminUser = User(
   email: 'johndoe@sab.tu',
   contact: '+2377777777',
   business: 'Santa Lucia',
-  store: 'Santal Lucia-Mendon',
+  store: 'Santa Lucia-Mendon',
   role: UserType.admin,
   password: 'password',
 );
@@ -627,7 +670,7 @@ final manUser = User(
   email: 'johdoe@sab.tu',
   contact: '+2377777777',
   business: 'Santa Lucia',
-  store: 'Santal Lucia-Mendon',
+  store: 'Santa Lucia-Mendon',
   role: UserType.manager,
   password: 'password',
 );

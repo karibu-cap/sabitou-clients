@@ -54,9 +54,33 @@ class AppInternationalizationService extends GetxService {
       'en': 'Search for product',
       'fr': 'Rechercher un produit',
     },
-    'createAccount': {
-      'en': 'Create account',
-      'fr': 'Creer un compte',
+    'account': {
+      'en': 'Account',
+      'fr': 'Compte',
+    },
+    'uploadNewPicture': {
+      'en': 'Upload new picture',
+      'fr': 'Télécharger une nouvelle image',
+    },
+    'deletePicture': {
+      'en': 'Delete picture',
+      'fr': 'Supprimer l\'image',
+    },
+    'firstName': {
+      'en': 'First name',
+      'fr': 'Prénom',
+    },
+    'lastName': {
+      'en': 'Last name',
+      'fr': 'Nom de famille',
+    },
+    'contactEmail': {
+      'en': 'Contact email',
+      'fr': 'Email de contact',
+    },
+    'manageYourAccountEmailAddress': {
+      'en': 'Manage your account email address',
+      'fr': 'Gérer l\'adresse email de votre compte',
     },
     'email': {
       'en': 'Email',
@@ -65,14 +89,6 @@ class AppInternationalizationService extends GetxService {
     'password': {
       'en': 'Password',
       'fr': 'Mot de passe',
-    },
-    'firstName': {
-      'en': 'First name',
-      'fr': 'Prenom',
-    },
-    'lastName': {
-      'en': 'Last name',
-      'fr': 'Nom',
     },
     'gettingStarted': {
       'en': 'Getting started',
@@ -450,6 +466,111 @@ class AppInternationalizationService extends GetxService {
       'cancel',
     );
   }
+
+  /// Returns the localized value of account.
+String get account {
+  return _stringOfLocalizedValue(
+    'account',
+  );
+}
+
+/// Returns the localized value of uploadNewPicture.
+String get uploadNewPicture {
+  return _stringOfLocalizedValue(
+    'uploadNewPicture',
+  );
+}
+
+/// Returns the localized value of deletePicture.
+String get deletePicture {
+  return _stringOfLocalizedValue(
+    'deletePicture',
+  );
+}
+
+/// Returns the localized value of contactEmail.
+String get contactEmail {
+  return _stringOfLocalizedValue(
+    'contactEmail',
+  );
+}
+
+/// Returns the localized value of manageYourAccountEmailAddress.
+String get manageYourAccountEmailAddress {
+  return _stringOfLocalizedValue(
+    'manageYourAccountEmailAddress',
+  );
+}
+
+/// Returns the localized value of business.
+String get business {
+  return _stringOfLocalizedValue(
+    'business',
+  );
+}
+
+/// Returns the localized value of manageYourBusiness.
+String get manageYourBusiness {
+  return _stringOfLocalizedValue(
+    'manageYourBusiness',
+  );
+}
+
+/// Returns the localized value of store.
+String get store {
+  return _stringOfLocalizedValue(
+    'store',
+  );
+}
+
+/// Returns the localized value of manageTheStore.
+String get manageTheStore {
+  return _stringOfLocalizedValue(
+    'manageTheStore',
+  );
+}
+
+/// Returns the localized value of changeTheBusiness.
+String get changeTheBusiness {
+  return _stringOfLocalizedValue(
+    'changeTheBusiness',
+  );
+}
+
+/// Returns the localized value of changeTheStore.
+String get changeTheStore {
+  return _stringOfLocalizedValue(
+    'changeTheStore',
+  );
+}
+
+/// Returns the localized value of accountSecurity.
+String get accountSecurity {
+  return _stringOfLocalizedValue(
+    'accountSecurity',
+  );
+}
+
+/// Returns the localized value of manageYourAccountSecurity.
+String get manageYourAccountSecurity {
+  return _stringOfLocalizedValue(
+    'manageYourAccountSecurity',
+  );
+}
+
+/// Returns the localized value of adminManager.
+String get adminManager {
+  return _stringOfLocalizedValue(
+    'adminManager',
+  );
+}
+
+/// Returns the localized value of inventoryManager.
+String get inventoryManager {
+  return _stringOfLocalizedValue(
+    'inventoryManager',
+  );
+}
 
   /// Changes the locale.
   void changeLocale([Locale? newLocale]) {
