@@ -14,6 +14,7 @@ import 'services/themes/app_themes.dart';
 import 'services/user_service_client.dart';
 import 'themes/themes.dart';
 import 'utils/constants.dart';
+import 'utils/user_preference.dart';
 
 /// The logger configuration.
 Future<void> main() async {
@@ -86,7 +87,14 @@ Future<void> _initServices() async {
   final grpc = Get.put<GrpcService>(GrpcService(), permanent: true);
 
   /// Register of userService.
+  final userServiceClient =
+      UserClientService(clientChannel: grpc.clientChannel);
   Get.lazyPut<UserClientService>(
-    () => UserClientService(clientChannel: grpc.clientChannel),
+    () => userServiceClient,
+  );
+
+  await Get.putAsync(
+    () async => UserPreferences(),
+    permanent: true,
   );
 }

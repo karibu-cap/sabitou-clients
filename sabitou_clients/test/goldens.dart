@@ -55,6 +55,7 @@ Future<void> multiScreenMultiLocaleGolden(
           name: '1080p',
           size: Size(1920, 1080),
         ),
+        const Device(name: '480p', size: Size(720, 480)),
         const Device(
           name: 'standard',
           size: Size(375, 740),

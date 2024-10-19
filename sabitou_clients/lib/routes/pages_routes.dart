@@ -21,32 +21,32 @@ abstract class PagesRoutes {
   /// The home route, for example, http:localhost:8080.
   static final home = _HomeRoute();
 
-  /// The transfer route, for example, http:localhost:8080/connection.
-  static final connection = _ConnectionRoute();
-
-  /// The transfer route For example: http://localhost:8080/registration.
-  static final registration = _RegistrationRoute();
-
   /// The dashboard route, for example, http:localhost:8080/stores.
   static final stores = _StoresRoute();
 
   /// The dashboard route, for example, http:localhost:8080/dashboard.
   static final dashboard = _DashboardRoute();
+
+  /// The sign in route, for example, http:localhost:8080/signin.
+  static final signIn = _SignInRoute();
+
+  /// The sign up route, for example, http:localhost:8080/signup.
+  static final signUp = _SignUpRoute();
+}
+
+class _SignInRoute extends PagesRoutesWithNoParams {
+  @override
+  String get pattern => '/signin';
+}
+
+class _SignUpRoute extends PagesRoutesWithNoParams {
+  @override
+  String get pattern => '/signup';
 }
 
 class _HomeRoute extends PagesRoutesWithNoParams {
   @override
   String get pattern => '/';
-}
-
-class _ConnectionRoute extends PagesRoutesWithNoParams {
-  @override
-  String get pattern => '/connection';
-}
-
-class _RegistrationRoute extends PagesRoutesWithNoParams {
-  @override
-  String get pattern => '/registration';
 }
 
 class _StoresRoute extends PagesRoutesWithNoParams {
