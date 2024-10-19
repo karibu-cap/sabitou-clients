@@ -6,6 +6,7 @@ import '../routes/app_routes.dart';
 import '../routes/pages_routes.dart';
 import '../services/internationalization/internationalization.dart';
 import '../themes/app_colors.dart';
+import '../utils/user_preference.dart';
 import 'components/language_selection.dart';
 import 'components/sb_container.dart';
 import 'components/theme_switcher.dart';
@@ -57,6 +58,7 @@ class NavDrawer extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     final width =
         isLarge ? min(200.0, size.width * 0.15) : min(90.0, size.width * 0.09);
+    final userPreference = UserPreferences.instance;
 
     /// The navbar items.
     final List<NavbarItem> firstNavbarSection = [
@@ -69,15 +71,16 @@ class NavDrawer extends StatelessWidget {
           PagesRoutes.dashboard.pattern,
         ),
       ),
-      NavbarItem(
-        label: AppInternationalizationService.to.stores,
-        icon: Icons.store_outlined,
-        activeIcon: Icons.store,
-        dashboardLabelPage: DashboardLabelPage.stores,
-        onPressed: () => AppRouter.go(
-          PagesRoutes.stores.create(),
+      if (userPreference.business != null)
+        NavbarItem(
+          label: AppInternationalizationService.to.stores,
+          icon: Icons.store_outlined,
+          activeIcon: Icons.store,
+          dashboardLabelPage: DashboardLabelPage.stores,
+          onPressed: () => AppRouter.go(
+            PagesRoutes.stores.create(),
+          ),
         ),
-      ),
     ];
 
     /// The second nav bar items.

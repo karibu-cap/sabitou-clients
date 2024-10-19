@@ -54,6 +54,126 @@ class AppInternationalizationService extends GetxService {
       'en': 'Search for product',
       'fr': 'Rechercher un produit',
     },
+    'createAccount': {
+      'en': 'Create account',
+      'fr': 'Creer un compte',
+    },
+    'email': {
+      'en': 'Email',
+      'fr': 'Email',
+    },
+    'password': {
+      'en': 'Password',
+      'fr': 'Mot de passe',
+    },
+    'firstName': {
+      'en': 'First name',
+      'fr': 'Prenom',
+    },
+    'lastName': {
+      'en': 'Last name',
+      'fr': 'Nom',
+    },
+    'gettingStarted': {
+      'en': 'Getting started',
+      'fr': 'Commencer',
+    },
+    'alreadyHaveAnAccount': {
+      'en': 'Already have an account?',
+      'fr': 'Vous avez deja un compte?',
+    },
+    'signIn': {
+      'en': 'Sign in',
+      'fr': 'Se connecter',
+    },
+    'signUp': {
+      'en': 'Sign up',
+      'fr': 'S\'inscrire',
+    },
+    'dontHaveAnAccount': {
+      'en': 'Don\'t have an account?',
+      'fr': 'Vous n\'avez pas de compte?',
+    },
+    'loginInYourAccount': {
+      'en': 'Login in your account',
+      'fr': 'Connectez-vous dans votre compte',
+    },
+    'welcomeBack': {
+      'en': 'Welcome back',
+      'fr': 'Bienvenue',
+    },
+    'enterYourFirstName': {
+      'en': 'Enter your first name',
+      'fr': 'Entrez votre prenom',
+    },
+    'enterValidEmail': {
+      'en': 'Enter valid email',
+      'fr': 'Entrez un email valide',
+    },
+    'confirmPassword': {
+      'en': 'Confirm password',
+      'fr': 'Confirmer le mot de passe',
+    },
+    'passwordDoesNotMatch': {
+      'en': 'Password does not match',
+      'fr': 'Mot de passe ne correspond pas',
+    },
+    'enterYourLastName': {
+      'en': 'Enter your last name',
+      'fr': 'Entrez votre nom',
+    },
+    'passwordMustBeAtLeast6Characters': {
+      'en': 'Password must be at least 6 characters',
+      'fr': 'Le mot de passe doit contenir au moins 6 caractères',
+    },
+    'failed': {
+      'en': 'Failed',
+      'fr': 'Echec',
+    },
+    'Success': {
+      'en': 'Success',
+      'fr': 'Reussi',
+    },
+    'businessName': {
+      'en': 'Business name',
+      'fr': 'Nom de l\'entreprise',
+    },
+    'businessDescription': {
+      'en': 'Business description',
+      'fr': 'Description de l\'entreprise',
+    },
+    'newStore': {
+      'en': 'New store',
+      'fr': 'Nouveau magasin',
+    },
+    'storeName': {
+      'en': 'Store name',
+      'fr': 'Nom du magasin',
+    },
+    'storeDescription': {
+      'en': 'Store description',
+      'fr': 'Description du magasin',
+    },
+    'storeAddress': {
+      'en': 'Store address',
+      'fr': 'Adresse du magasin',
+    },
+    'save': {
+      'en': 'Save',
+      'fr': 'Enregistrer',
+    },
+    'inputRequired': {
+      'en': 'Input required',
+      'fr': 'Saisie requise',
+    },
+    'minimum3Characters': {
+      'en': 'Minimum 3 characters',
+      'fr': 'Minimum 3 caractères',
+    },
+    'storeForYourBusiness': {
+      'en': 'Store for your business',
+      'fr': 'Magasin pour votre entreprise',
+    },
   };
 
   /// Direct access to the internationalization service.
@@ -71,6 +191,216 @@ class AppInternationalizationService extends GetxService {
         const Locale('en'),
         const Locale('fr'),
       ];
+
+  /// Returns the localized value of minimum3Characters.
+  String get minimum3Characters {
+    return _stringOfLocalizedValue(
+      'minimum3Characters',
+    );
+  }
+
+  /// Returns the localized value of storeForYourBusiness.
+  String get storeForYourBusiness {
+    return _stringOfLocalizedValue(
+      'storeForYourBusiness',
+    );
+  }
+
+  /// Returns the localized value of failed.
+  String get failed {
+    return _stringOfLocalizedValue(
+      'failed',
+    );
+  }
+
+  /// Returns the localized value of businessName.
+  String get businessName {
+    return _stringOfLocalizedValue(
+      'businessName',
+    );
+  }
+
+  /// Returns the localized value of inputRequired.
+  String get inputRequired {
+    return _stringOfLocalizedValue(
+      'inputRequired',
+    );
+  }
+
+  /// Returns the localized value of save.
+  String get save {
+    return _stringOfLocalizedValue(
+      'save',
+    );
+  }
+
+  /// Returns the localized value of businessDescription.
+  String get businessDescription {
+    return _stringOfLocalizedValue(
+      'businessDescription',
+    );
+  }
+
+  /// Returns the localized value of newStore.
+  String get newStore {
+    return _stringOfLocalizedValue(
+      'newStore',
+    );
+  }
+
+  /// Returns the localized value of storeName.
+  String get storeName {
+    return _stringOfLocalizedValue(
+      'storeName',
+    );
+  }
+
+  /// Returns the localized value of storeDescription.
+  String get storeDescription {
+    return _stringOfLocalizedValue(
+      'storeDescription',
+    );
+  }
+
+  /// Returns the localized value of storeAddress.
+  String get storeAddress {
+    return _stringOfLocalizedValue(
+      'storeAddress',
+    );
+  }
+
+  /// Returns the localized value of Success.
+  String get success {
+    return _stringOfLocalizedValue(
+      'Success',
+    );
+  }
+
+  /// Returns the localized value of enterYourFirstName.
+  String get enterYourFirstName {
+    return _stringOfLocalizedValue(
+      'enterYourFirstName',
+    );
+  }
+
+  /// Returns the localized value of enterYourLastName.
+  String get enterYourLastName {
+    return _stringOfLocalizedValue(
+      'enterYourLastName',
+    );
+  }
+
+  /// Returns the localized value of enterValidEmail.
+  String get enterValidEmail {
+    return _stringOfLocalizedValue(
+      'enterValidEmail',
+    );
+  }
+
+  /// Returns the localized value of confirmPassword.
+  String get confirmPassword {
+    return _stringOfLocalizedValue(
+      'confirmPassword',
+    );
+  }
+
+  /// Returns the localized value of passwordDoesNotMatch.
+  String get passwordDoesNotMatch {
+    return _stringOfLocalizedValue(
+      'passwordDoesNotMatch',
+    );
+  }
+
+  /// Returns the localized value of passwordMustBeAtLeast6Characters.
+  String get passwordMustBeAtLeast6Characters {
+    return _stringOfLocalizedValue(
+      'passwordMustBeAtLeast6Characters',
+    );
+  }
+
+  /// Returns the localized value of email.
+  String get email {
+    return _stringOfLocalizedValue(
+      'email',
+    );
+  }
+
+  /// Returns the localized value of password.
+  String get password {
+    return _stringOfLocalizedValue(
+      'password',
+    );
+  }
+
+  /// Returns the localized value of firstName.
+  String get firstName {
+    return _stringOfLocalizedValue(
+      'firstName',
+    );
+  }
+
+  /// Returns the localized value of lastName.
+  String get lastName {
+    return _stringOfLocalizedValue(
+      'lastName',
+    );
+  }
+
+  /// Returns the localized value of gettingStarted.
+  String get gettingStarted {
+    return _stringOfLocalizedValue(
+      'gettingStarted',
+    );
+  }
+
+  /// Returns the localized value of alreadyHaveAnAccount.
+  String get alreadyHaveAnAccount {
+    return _stringOfLocalizedValue(
+      'alreadyHaveAnAccount',
+    );
+  }
+
+  /// Returns the localized value of signIn.
+  String get signIn {
+    return _stringOfLocalizedValue(
+      'signIn',
+    );
+  }
+
+  /// Returns the localized value of signUp.
+  String get signUp {
+    return _stringOfLocalizedValue(
+      'signUp',
+    );
+  }
+
+  /// Returns the localized value of dontHaveAnAccount.
+  String get dontHaveAnAccount {
+    return _stringOfLocalizedValue(
+      'dontHaveAnAccount',
+    );
+  }
+
+  /// Returns the localized value of loginInYourAccount.
+  String get loginInYourAccount {
+    return _stringOfLocalizedValue(
+      'loginInYourAccount',
+    );
+  }
+
+  /// Returns the localized value of welcomeBack.
+  String get welcomeBack {
+    return _stringOfLocalizedValue(
+      'welcomeBack',
+    );
+  }
+
+  /// Returns the localized value of createAccount.
+  String get createAccount {
+    return _stringOfLocalizedValue(
+      'createAccount',
+    );
+  }
 
   /// Returns the localized value of searchForProduct.
   String get searchForProduct {

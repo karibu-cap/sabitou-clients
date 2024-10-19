@@ -9,3 +9,12 @@ final class PreferencesKey {
   /// The language of the app.
   static const String language = 'language';
 }
+
+/// The static images.
+final class StaticImages {
+  /// The logo image.
+  static const String logo = 'assets/images/logo.png';
+
+  /// The large logo image.
+  static const String largeLogo = 'assets/images/large-logo.png';
+}

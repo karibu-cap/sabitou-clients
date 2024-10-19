@@ -13,7 +13,7 @@ final class Themes {
     subThemesData: const FlexSubThemesData(
       blendOnLevel: 10,
       blendOnColors: false,
-      inputDecoratorRadius: 8.0,
+      inputDecoratorRadius: 12.0,
       inputDecoratorBorderType: FlexInputBorderType.outline,
       fabRadius: 8.0,
       elevatedButtonRadius: 8.0,

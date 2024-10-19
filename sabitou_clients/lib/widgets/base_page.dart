@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../services/internationalization/internationalization.dart';
 import '../themes/app_colors.dart';
 import '../utils/app_layout.dart';
+import '../utils/user_preference.dart';
 import 'components/sb_container.dart';
 import 'drawer.dart';
 
@@ -35,18 +36,16 @@ final class BasePageView extends StatelessWidget {
       body: Obx(
         () => Row(
           children: [
-            Container(
-              child: switch ((isDesktop, isTablet)) {
-                (true, _) => NavDrawer(
-                    selectedItem: itemPage,
-                  ),
-                (_, true) => NavDrawer(
-                    isLarge: false,
-                    selectedItem: itemPage,
-                  ),
-                (_, _) => const SizedBox.shrink(),
-              },
-            ),
+            switch ((isDesktop, isTablet)) {
+              (true, _) => NavDrawer(
+                  selectedItem: itemPage,
+                ),
+              (_, true) => NavDrawer(
+                  isLarge: false,
+                  selectedItem: itemPage,
+                ),
+              (_, _) => const SizedBox.shrink(),
+            },
             Expanded(
               child: SbContainer(
                 level: 5,
@@ -112,6 +111,7 @@ final class _LabelsHeader extends SliverPersistentHeaderDelegate {
     final Color? borderColor =
         shrinkOffset > 10 ? Theme.of(context).highlightColor : null;
     final AppLayout appLayout = AppLayout(context);
+    final user = UserPreferences.instance.user;
 
     return SbContainer(
       level: shrinkOffset > 10 ? 1 : null,
@@ -142,18 +142,17 @@ final class _LabelsHeader extends SliverPersistentHeaderDelegate {
               textInputAction: TextInputAction.search,
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  _NotificationIcon(
+                  const _NotificationIcon(
                     notificationCount: 2,
                   ),
                   _UserAvatar(
-                    name: 'John Doe',
-                    userType: 'Admin',
+                    name: user?.firstName ?? 'user',
                     isOnline: true,
                   ),
                 ],
@@ -187,12 +186,12 @@ final class _NotificationIcon extends StatelessWidget {
 
 class _UserAvatar extends StatelessWidget {
   final String name;
-  final String userType;
+  final String? userType;
   final bool isOnline;
 
   const _UserAvatar({
     required this.name,
-    required this.userType,
+    this.userType,
     required this.isOnline,
   });
 
@@ -235,10 +234,13 @@ class _UserAvatar extends StatelessWidget {
                 name,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              Text(
-                userType,
-                style: TextStyle(color: Theme.of(context).hintColor),
-              ),
+              switch (userType) {
+                final String type => Text(
+                    type,
+                    style: TextStyle(color: Theme.of(context).hintColor),
+                  ),
+                _ => const SizedBox.shrink(),
+              },
             ],
           ),
       ],

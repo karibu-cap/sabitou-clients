@@ -14,6 +14,7 @@ class SbContainer extends Container {
     super.margin,
     super.width,
     super.height,
+    super.constraints,
     Color? color,
     Gradient? gradient,
     BoxBorder? border,
