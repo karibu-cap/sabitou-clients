@@ -54,41 +54,9 @@ class AppInternationalizationService extends GetxService {
       'en': 'Search for product',
       'fr': 'Rechercher un produit',
     },
-    'adminManager': {
-      'en': 'Admin manager',
-      'fr': 'Gestionnaire admin',
-    },
-    'inventoryManager': {
-      'en': 'Inventory manager',
-      'fr': 'Gestionnaire des stocks',
-    },
-    'account': {
-      'en': 'Account',
-      'fr': 'Compte',
-    },
-    'uploadNewPicture': {
-      'en': 'New picture',
-      'fr': 'Nouvelle image',
-    },
-    'deletePicture': {
-      'en': 'Delete picture',
-      'fr': 'Supprimer l\'image',
-    },
-    'firstName': {
-      'en': 'First name',
-      'fr': 'Prénom',
-    },
-    'lastName': {
-      'en': 'Last name',
-      'fr': 'Nom de famille',
-    },
-    'contactEmail': {
-      'en': 'Contact email',
-      'fr': 'Email de contact',
-    },
-    'manageYourAccountEmailAddress': {
-      'en': 'Manage your account email address',
-      'fr': 'Gérer l\'adresse email de votre compte',
+    'createAccount': {
+      'en': 'Create account',
+      'fr': 'Creer un compte',
     },
     'email': {
       'en': 'Email',
@@ -97,6 +65,14 @@ class AppInternationalizationService extends GetxService {
     'password': {
       'en': 'Password',
       'fr': 'Mot de passe',
+    },
+    'firstName': {
+      'en': 'First name',
+      'fr': 'Prenom',
+    },
+    'lastName': {
+      'en': 'Last name',
+      'fr': 'Nom',
     },
     'gettingStarted': {
       'en': 'Getting started',
@@ -198,7 +174,34 @@ class AppInternationalizationService extends GetxService {
       'en': 'Store for your business',
       'fr': 'Magasin pour votre entreprise',
     },
-    
+    'adminManager': {
+      'en': 'Admin manager',
+      'fr': 'Gestionnaire admin',
+    },
+    'inventoryManager': {
+      'en': 'Inventory manager',
+      'fr': 'Gestionnaire des stocks',
+    },
+    'account': {
+      'en': 'Account',
+      'fr': 'Compte',
+    },
+    'uploadNewPicture': {
+      'en': 'New picture',
+      'fr': 'Nouvelle image',
+    },
+    'deletePicture': {
+      'en': 'Delete picture',
+      'fr': 'Supprimer l\'image',
+    },
+    'contactEmail': {
+      'en': 'Contact email',
+      'fr': 'Email de contact',
+    },
+    'manageYourAccountEmailAddress': {
+      'en': 'Manage your account email address',
+      'fr': 'Gérer l\'adresse email de votre compte',
+    },
   };
 
   /// Direct access to the internationalization service.
