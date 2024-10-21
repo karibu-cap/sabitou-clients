@@ -1,26 +1,27 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get/get.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:sabitou_clients/screens/profile/profile_view.dart';
+import 'package:sabitou_clients/services/storage/app_storate.dart';
+import 'package:sabitou_clients/utils/user_preference.dart';
 
 import '../../goldens.dart';
 
-class CreateProfileViewWidgetds extends StatelessWidget {
-  const CreateProfileViewWidgetds({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const ProfileView();
-  }
-}
-
 void main() {
   group('Goldens', () {
-    testGoldens('Profile page', (tester) async {
+    setUpAll(() {
+      final storage = AppStorageService(AppStorageType.fake);
+      Get.put(storage);
+    });
+
+    setUp(() {
+      Get.put<UserPreferences>(UserPreferences());
+    });
+    testGoldens('Profile view', (tester) async {
       await multiScreenMultiLocaleGolden(
         tester,
-        const CreateProfileViewWidgetds(),
-        'profile_page',
+        const ProfileView(),
+        'profile_view',
       );
     });
   });
