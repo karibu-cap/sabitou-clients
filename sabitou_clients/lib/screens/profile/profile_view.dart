@@ -36,83 +36,133 @@ class _ProfileBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppInternationalizationService.to.account,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    isAdmin
-                        ? AppInternationalizationService.to.adminManager
-                        : AppInternationalizationService.to.inventoryManager,
-                  ),
-                ],
-              ),
-              if (isAdmin)
-                IconButton(
-                  onPressed: () {},
-                  icon: Image.asset(
-                    'assets/images/Person_edit.png',
-                    width: 35.0,
-                    height: 35.0,
-                  ),
-                ),
-            ],
-          ),
-          const _Spacer(),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _UserAvatar(
-                    imageUrl: user.imageUrl,
-                    fullName: '${user.firstName} ${user.lastName}',
-                    isOnline: true,
-                  ),
-                  const SizedBox(width: 20.0),
-                  if (isAdmin)
-                    const Expanded(
-                      child: _AvatarEditButtons(),
-                    ),
-                ],
-              );
-            },
-          ),
-          const SizedBox(height: 16.0),
-          _NameFields(firstName: user.firstName, lastName: user.lastName),
-          const _Spacer(),
-          Text(
-            AppInternationalizationService.to.contactEmail,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Text(
-            AppInternationalizationService.to.manageYourAccountEmailAddress,
-          ),
-          const SizedBox(height: 16.0),
-          _EmailPasswordFields(
-            email: user.email,
-            password: user.password,
-          ),
-          const _Spacer(),
-          _BusinessSection(business: user.business, isAdmin: isAdmin),
-          const SizedBox(height: 10.0),
-          _StoreSection(store: user.store, isAdmin: isAdmin),
-          const SizedBox(height: 16.0),
-          Text(
-            AppInternationalizationService.to.accountSecurity,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Text(
-            AppInternationalizationService.to.manageYourAccountSecurity,
-          ),
+          _ProfileSection(isAdmin: isAdmin, user: user),
+          _UserInfoSection(user: user),
+          _BusinessStoreSection(user: user, isAdmin: isAdmin),
         ],
       ),
+    );
+  }
+}
+
+class _ProfileSection extends StatelessWidget {
+  final bool isAdmin;
+  final User user;
+
+  const _ProfileSection({
+    required this.isAdmin,
+    required this.user,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  AppInternationalizationService.to.account,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  isAdmin
+                      ? AppInternationalizationService.to.adminManager
+                      : AppInternationalizationService.to.inventoryManager,
+                ),
+              ],
+            ),
+            if (isAdmin)
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.person,
+                  size: 35.0,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+          ],
+        ),
+        const _Spacer(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _UserAvatar(
+              imageUrl: user.imageUrl,
+              fullName: '${user.firstName} ${user.lastName}',
+              isOnline: true,
+            ),
+            const SizedBox(width: 20.0),
+            if (isAdmin)
+              const Expanded(
+                child: _AvatarEditButtons(),
+              ),
+          ],
+        ),
+        const SizedBox(height: 16.0),
+      ],
+    );
+  }
+}
+
+class _UserInfoSection extends StatelessWidget {
+  final User user;
+  const _UserInfoSection({required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _NameFields(firstName: user.firstName, lastName: user.lastName),
+        const _Spacer(),
+        Text(
+          AppInternationalizationService.to.contactEmail,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Text(
+          AppInternationalizationService.to.manageYourAccountEmailAddress,
+        ),
+        const SizedBox(height: 16.0),
+        _EmailPasswordFields(
+          email: user.email,
+          password: user.password,
+        ),
+        const _Spacer(),
+      ],
+    );
+  }
+}
+
+class _BusinessStoreSection extends StatelessWidget {
+  final User user;
+  final bool isAdmin;
+  const _BusinessStoreSection({
+    required this.user,
+    required this.isAdmin,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _BusinessSection(business: user.business, isAdmin: isAdmin),
+        const SizedBox(height: 10.0),
+        _StoreSection(store: user.store, isAdmin: isAdmin),
+        const SizedBox(height: 16.0),
+        Text(
+          AppInternationalizationService.to.accountSecurity,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Text(
+          AppInternationalizationService.to.manageYourAccountSecurity,
+        ),
+      ],
     );
   }
 }
@@ -130,16 +180,21 @@ class _UserAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double width =
+        (MediaQuery.sizeOf(context).width * 0.2).clamp(70, 100);
+    final double height =
+        (MediaQuery.sizeOf(context).width * 0.2).clamp(70, 100);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SbContainer(
-          height: 100.0,
-          width: 100.0,
+          height: height,
+          width: width,
           borderRadius: const BorderRadius.all(Radius.circular(100)),
           child: Badge(
             label: const SizedBox.shrink(),
-            offset: const Offset(-10, -30),
+            offset: Offset(-width * 0.15, -height * 0.25),
             alignment: Alignment.bottomRight,
             smallSize: 50,
             backgroundColor:
@@ -157,15 +212,9 @@ class _UserAvatar extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16.0),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              fullName,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
+        Text(
+          fullName,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -190,7 +239,7 @@ class _AvatarEditButtons extends StatelessWidget {
               fixedSize: Size(
                 (MediaQuery.sizeOf(context).width * 0.4).clamp(90, 250),
                 appLayout.isMobile
-                    ? (MediaQuery.sizeOf(context).height * 0.1).clamp(50, 100)
+                    ? (MediaQuery.sizeOf(context).height * 0.08).clamp(50, 100)
                     : 50,
               ),
             ),
@@ -206,7 +255,7 @@ class _AvatarEditButtons extends StatelessWidget {
               fixedSize: Size(
                 (MediaQuery.sizeOf(context).width * 0.4).clamp(90, 250),
                 appLayout.isMobile
-                    ? (MediaQuery.sizeOf(context).height * 0.1).clamp(50, 100)
+                    ? (MediaQuery.sizeOf(context).height * 0.08).clamp(50, 100)
                     : 50,
               ),
             ),

@@ -54,13 +54,21 @@ class AppInternationalizationService extends GetxService {
       'en': 'Search for product',
       'fr': 'Rechercher un produit',
     },
+    'adminManager': {
+      'en': 'Admin manager',
+      'fr': 'Gestionnaire admin',
+    },
+    'inventoryManager': {
+      'en': 'Inventory manager',
+      'fr': 'Gestionnaire des stocks',
+    },
     'account': {
       'en': 'Account',
       'fr': 'Compte',
     },
     'uploadNewPicture': {
-      'en': 'Upload new picture',
-      'fr': 'Télécharger une nouvelle image',
+      'en': 'New picture',
+      'fr': 'Nouvelle image',
     },
     'deletePicture': {
       'en': 'Delete picture',
@@ -190,6 +198,7 @@ class AppInternationalizationService extends GetxService {
       'en': 'Store for your business',
       'fr': 'Magasin pour votre entreprise',
     },
+    
   };
 
   /// Direct access to the internationalization service.
