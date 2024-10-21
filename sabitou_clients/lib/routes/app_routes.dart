@@ -59,7 +59,6 @@ final class AppRouter {
             );
           },
         ),
-
       ];
 
   /// Gets the current route name.

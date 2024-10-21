@@ -532,12 +532,12 @@ class AppInternationalizationService extends GetxService {
     );
   }
 
-/// Returns the localized value of contactEmail.
-String get contactEmail {
-  return _stringOfLocalizedValue(
-    'contactEmail',
-  );
-}
+  /// Returns the localized value of contactEmail.
+  String get contactEmail {
+    return _stringOfLocalizedValue(
+      'contactEmail',
+    );
+  }
 
   /// Returns the localized value of manageYourAccountEmailAddress.
   String get manageYourAccountEmailAddress {
@@ -546,12 +546,12 @@ String get contactEmail {
     );
   }
 
-/// Returns the localized value of business.
-String get business {
-  return _stringOfLocalizedValue(
-    'business',
-  );
-}
+  /// Returns the localized value of business.
+  String get business {
+    return _stringOfLocalizedValue(
+      'business',
+    );
+  }
 
   /// Returns the localized value of manageYourBusiness.
   String get manageYourBusiness {
