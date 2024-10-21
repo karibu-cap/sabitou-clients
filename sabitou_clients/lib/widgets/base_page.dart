@@ -208,7 +208,6 @@ class _UserAvatar extends StatelessWidget {
       borderRadius: const BorderRadius.all(Radius.circular(100)),
       splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
       child: Row(
-<<<<<<< HEAD
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SbContainer(
@@ -254,53 +253,6 @@ class _UserAvatar extends StatelessWidget {
             ),
           ],
       ),
-=======
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SbContainer(
-          level: 5,
-          height: 35,
-          width: 35,
-          borderRadius: const BorderRadius.all(Radius.circular(100)),
-          child: Badge(
-            label: const SizedBox.shrink(),
-            offset: const Offset(3, -15),
-            alignment: Alignment.bottomRight,
-            smallSize: 15,
-            backgroundColor:
-                isOnline ? AppColors.success500 : AppColors.error500,
-            child: CircleAvatar(
-              radius: 30,
-              backgroundColor: Theme.of(context).cardColor,
-              child: Icon(
-                Icons.person,
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 5),
-        if (!appLayout.isMobile)
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              switch (userType) {
-                final String type => Text(
-                    type,
-                    style: TextStyle(color: Theme.of(context).hintColor),
-                  ),
-                _ => const SizedBox.shrink(),
-              },
-            ],
-          ),
-      ],
-    ),
->>>>>>> f1277aa (resolve conflicts)
     );
   }
 }
