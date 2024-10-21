@@ -202,6 +202,38 @@ class AppInternationalizationService extends GetxService {
       'en': 'Manage your account email address',
       'fr': 'Gérer l\'adresse email de votre compte',
     },
+    'business': {
+      'en': 'Business',
+      'fr': 'Entreprise',
+    },
+    'manageYourBusiness': {
+      'en': 'Manage your business',
+      'fr': 'Gérer votre entreprise',
+    },
+    'store': {
+      'en': 'Store',
+      'fr': 'Magasin',
+    },
+    'manageTheStore': {
+      'en': 'Manage the store',
+      'fr': 'Gérer le magasin',
+    },
+    'changeTheBusiness': {
+      'en': 'Change the business',
+      'fr': 'Changer d\'entreprise',
+    },
+    'changeTheStore': {
+      'en': 'Change the store',
+      'fr': 'Changer de magasin',
+    },
+    'accountSecurity': {
+      'en': 'Account security',
+      'fr': 'Sécurité du compte',
+    },
+    'manageYourAccountSecurity': {
+      'en': 'Manage your account security',
+      'fr': 'Gérer la sécurité de votre compte',
+    },
   };
 
   /// Direct access to the internationalization service.
